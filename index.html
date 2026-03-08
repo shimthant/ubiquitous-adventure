@@ -10,13 +10,13 @@
       padding:0;
       box-sizing:border-box;
     }
-
-    body{
-      font-family:Arial, sans-serif;
-      background:#00d9ff;
-      color:#fff;
-      min-height:100vh;
-    }
+body{
+font-family:Arial, sans-serif;
+background:linear-gradient(135deg,#00eaff,#0078ff);
+color:white;
+min-height:100vh;
+}
+    
 
     .container{
       width:100%;
@@ -252,6 +252,9 @@
       font-weight:bold;
       box-shadow:0 0 12px rgba(255, 217, 0, 0.7);
     }
+    <button class="telegram-btn" onclick="sendTelegramOrder()">
+Order via Telegram
+</button>
 
     .hint{
       margin-top:12px;
@@ -286,6 +289,7 @@
     <div class="app-grid">
       <div class="app-card active" onclick="showGame('mlbb', this)">
         <h3>MLBB</h3>
+        <div class="app-grid" id="gameMenu">
       </div>
       <div class="app-card" onclick="showGame('genshin', this)">
         <h3>Genshin Impact</h3>
@@ -298,7 +302,7 @@
       </div>
     </div>
 
-    <div class="content">
+    <div id="gamePage" class="content" style="display:none;">
       <div class="panel">
         <div id="gameTitle" class="section-title">Mobile Legends Top up</div>
 
@@ -476,7 +480,45 @@
         message += `%0ASelected Items:%0A`;
         selectedItems.forEach((item, i) => {
           message += `${i + 1}. ${item.name} - ${item.price} ks%0A`;
-        });
+        });function showGame(gameKey, cardEl){
+
+document.getElementById("gameMenu").style.display="none";
+document.getElementById("gamePage").style.display="grid";
+
+currentGame = gameKey;
+const game = gameData[gameKey];
+
+document.getElementById("gameTitle").textContent = game.title;
+document.getElementById("gameImage").src = game.image;
+
+document.querySelectorAll(".app-card").forEach(card => card.classList.remove("active"));
+if(cardEl) cardEl.classList.add("active");
+
+renderItems();
+updateCart();
+
+        }
+      }
+      function sendTelegramOrder(){
+
+let account = document.getElementById("accountInfo").value;
+let items = document.querySelectorAll(".item-check:checked");
+
+let message = "Gamepay Hub Order\n\n";
+
+items.forEach((item)=>{
+let name = item.dataset.name;
+let price = item.dataset.price;
+
+message += name + " - " + price + " ks\n";
+});
+
+message += "\nAccount Info:\n" + account;
+
+let url = "https://t.me/angsthtun?text=" + encodeURIComponent(message);
+
+window.open(url,"_blank");
+
       }
 
       const total = document.getElementById("totalPrice").textContent.replace(/,/g, "");
