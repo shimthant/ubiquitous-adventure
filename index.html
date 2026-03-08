@@ -923,9 +923,6 @@
       <div id="gameMenu" class="app-grid"></div>
     </div>
 
-    <div id="gameMenu" class="app-grid"></div>
-    </div>
-
     <div id="gamePage" class="game-page">
       <div class="panel">
         <div class="top-bar">
@@ -1101,7 +1098,7 @@ Name:"></textarea>
           { name: "💎 279", price: 15700 }
         ]
       },
-      genshin: {
+          genshin: {
         title: "Genshin Impact",
         subtitle: "Genesis Crystal • Blessing",
         icon: "https://seeklogo.com/images/G/genshin-impact-logo-1A8E3F7F0B-seeklogo.com.png",
@@ -1222,7 +1219,7 @@ Name:"></textarea>
           </label>
           <div class="price">${Number(item.price).toLocaleString()} ks</div>
         `;
-        
+
         itemsContainer.appendChild(row);
       });
 
@@ -1318,30 +1315,36 @@ Name:"></textarea>
       const url = "https://t.me/" + TELEGRAM_USERNAME + "?text=" + encodeURIComponent(message);
       window.open(url, "_blank");
     }
-function openStockEditor(){
 
-const password = prompt("Enter admin password");
+    function openStockEditor() {
 
-if(password !== "diameter888"){
-alert("Access denied");
-return;
-}
+  if (!currentGame) return;
 
-const game = gameData[currentGame];
+  const password = prompt("Enter Admin Password");
 
-const editableData = {
-title: game.title,
-subtitle: game.subtitle,
-icon: game.icon,
-image: game.image,
-items: game.items
-};
+  if(password !== "gamepay12345xx"){
+    alert("Access Denied");
+    return;
+  }
 
-stockEditor.value = JSON.stringify(editableData, null, 2);
+  const game = gameData[currentGame];
 
-stockModal.classList.add("active");
+  const editableData = {
+    title: game.title,
+    subtitle: game.subtitle,
+    icon: game.icon,
+    image: game.image,
+    items: game.items
+  };
 
-}
+  stockEditor.value = JSON.stringify(editableData, null, 2);
+  stockModal.classList.add("active");
+    }
+
+      stockEditor.value = JSON.stringify(editableData, null, 2);
+      stockModal.classList.add("active");
+    }
+
     function closeStockEditor() {
       stockModal.classList.remove("active");
     }
@@ -1367,6 +1370,7 @@ stockModal.classList.add("active");
             price: Number(item.price)
           }))
         };
+        
         renderGameMenu();
         showGame(currentGame);
         closeStockEditor();
@@ -1381,10 +1385,14 @@ stockModal.classList.add("active");
         closeStockEditor();
       }
     });
-window.addEventListener("load", function () {
 
-renderGameMenu();
+    window.addEventListener("load", function() {
+      renderGameMenu();
 
+      setTimeout(() => {
+        document.getElementById("loadingScreen").classList.add("hide");
+      }, 1800);
+    });
   </script>
 </body>
 </html>
