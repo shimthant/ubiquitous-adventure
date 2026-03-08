@@ -1378,8 +1378,13 @@ Name:"></textarea>
       }
     });
 
-    window.addEventListener("load", function() {
-      renderGameMenu();
+    window.onload = function() {
+
+  renderGameMenu();
+
+  document.getElementById("loadingScreen").classList.add("hide");
+
+};
 
       setTimeout(() => {
         document.getElementById("loadingScreen").classList.add("hide");
