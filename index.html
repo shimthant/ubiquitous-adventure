@@ -17,9 +17,8 @@ font-family:Poppins,sans-serif;
 }
 
 body{
-background:linear-gradient(135deg,#041c40,#0b3d8c);
+background:#020c1b;
 color:white;
-min-height:100vh;
 overflow-x:hidden;
 }
 
@@ -33,9 +32,9 @@ z-index:-1;
 }
 
 .container{
-max-width:1200px;
+max-width:900px;
 margin:auto;
-padding:20px;
+padding:15px;
 }
 
 .header{
@@ -44,33 +43,34 @@ margin-bottom:25px;
 }
 
 .header h1{
-font-size:42px;
-color:#ffd900;
-text-shadow:0 0 12px #ffd900;
+font-size:36px;
+color:#00ffff;
+text-shadow:0 0 20px #00ffff;
 }
 
 .header p{
-color:#bceaff;
+color:#9fdfff;
 }
 
 .grid{
 display:grid;
-grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
-gap:20px;
+grid-template-columns:repeat(2,1fr);
+gap:15px;
 }
 
 .card{
-background:#0c4ab3;
-padding:25px;
-border-radius:18px;
+background:#041c40;
+padding:20px;
+border-radius:15px;
 text-align:center;
 cursor:pointer;
+border:1px solid #00ffff40;
 transition:.3s;
 }
 
 .card:hover{
 transform:translateY(-6px);
-background:#1565d8;
+box-shadow:0 0 20px #00ffff;
 }
 
 .card img{
@@ -78,43 +78,25 @@ width:60px;
 margin-bottom:10px;
 }
 
-.game-page{
-display:none;
-grid-template-columns:1.5fr 1fr;
-gap:20px;
-margin-top:20px;
-}
-
 .panel{
-background:#072a63;
-padding:20px;
-border-radius:18px;
-}
-
-.preview img{
-width:100%;
+background:#021733;
+padding:15px;
 border-radius:12px;
 margin-bottom:15px;
+border:1px solid #00ffff30;
 }
 
 .item{
 display:flex;
 justify-content:space-between;
-align-items:center;
-background:#1565d8;
+background:#06306d;
 padding:10px;
-border-radius:10px;
+border-radius:8px;
 margin-bottom:8px;
 }
 
-.qty{
-display:flex;
-gap:6px;
-align-items:center;
-}
-
 .qty button{
-background:#12d7ff;
+background:#00ffff;
 border:none;
 padding:4px 10px;
 border-radius:6px;
@@ -124,77 +106,52 @@ cursor:pointer;
 textarea{
 width:100%;
 border:none;
-border-radius:10px;
+border-radius:8px;
 padding:10px;
 margin-top:10px;
 }
-
-.btn{
-border:none;
-padding:10px 14px;
-border-radius:8px;
-cursor:pointer;
-font-weight:bold;
-}
-
-.back{background:#12d7ff;color:#04204e}
-.admin{background:#ffd900;color:black}
 
 .telegram{
 width:100%;
-margin-top:10px;
-background:#12d7ff;
-color:#04204e;
+margin-top:12px;
+background:#00ffff;
+color:#021733;
+padding:12px;
+border:none;
+border-radius:8px;
 font-size:18px;
+font-weight:bold;
+cursor:pointer;
+animation:glow 2s infinite alternate;
 }
 
-.history{
-margin-top:15px;
-background:#0c4ab3;
-padding:10px;
-border-radius:10px;
-max-height:200px;
-overflow:auto;
+@keyframes glow{
+from{box-shadow:0 0 10px #00ffff;}
+to{box-shadow:0 0 25px #00ffff;}
+}
+
+.payments{
+margin-top:10px;
+display:flex;
+flex-wrap:wrap;
+gap:10px;
+}
+
+.payments label{
+background:#06306d;
+padding:6px 10px;
+border-radius:6px;
+cursor:pointer;
 }
 
 .footer{
 text-align:center;
-margin-top:30px;
-color:#ffd900;
-}
-@media (max-width:768px){
-
-.game-page{
-grid-template-columns:1fr;
+margin-top:20px;
+color:#00ffff;
 }
 
-.panel{
-width:100%;
-}
-
-.header h1{
-font-size:30px;
-}
-
-.card{
-padding:18px;
-}
-
-.preview img{
-height:auto;
-}
-
-.item{
-font-size:14px;
-}
-
-.telegram{
-font-size:16px;
-}
-
-}
 </style>
-    </head>
+</head>
 
 <body>
 
@@ -209,22 +166,13 @@ font-size:16px;
 
 <div id="menu" class="grid"></div>
 
-<div id="gamePage" class="game-page">
+<div id="gamePage" style="display:none">
 
 <div class="panel">
 
-<div style="display:flex;justify-content:space-between">
 <h2 id="gameTitle"></h2>
 
-<div>
-<button class="btn admin" onclick="adminLogin()">Admin</button>
-<button class="btn back" onclick="backMenu()">Back</button>
-</div>
-</div>
-
-<div class="preview">
-<img id="gameImage">
-</div>
+<img id="gameImage" style="width:100%;border-radius:10px">
 
 <div id="items"></div>
 
@@ -236,84 +184,138 @@ font-size:16px;
 
 <div id="cart"></div>
 
-<div style="margin-top:10px">
-Total: <span id="total">0</span> ks
+<div style="margin-top:8px">
+Total Amount: <span id="total">0</span> ks
 </div>
 
 <textarea id="account" placeholder="Game ID / Server / Name"></textarea>
 
-<div style="margin-top:10px">
+<div class="payments">
 
 <label><input type="radio" name="pay" value="Kpay">Kpay</label>
 <label><input type="radio" name="pay" value="Wave">Wave</label>
 <label><input type="radio" name="pay" value="UAB">UAB</label>
-<label><input type="radio" name="pay" value="AyaPay">AyaPay</label>
 <label><input type="radio" name="pay" value="Binance">Binance</label>
+<label><input type="radio" name="pay" value="AyaPay">AyaPay</label>
+<label><input type="radio" name="pay" value="WeChat Pay">WeChat</label>
 
 </div>
 
-<input type="file" id="screenshot" style="margin-top:10px">
-
-<button class="btn telegram" onclick="sendOrder()">Order via Telegram</button>
-
-<div style="margin-top:10px">@angsthtun</div>
-
-<div class="history">
-<h4>Order History</h4>
-<div id="history"></div>
-</div>
+<button class="telegram" onclick="sendOrder()">🚀 Order via Telegram</button>
 
 </div>
 
+<button onclick="backMenu()">Back</button>
+
 </div>
 
-<div class="footer">Founder: Diameter Eight</div>
-    
+<div class="footer">
+Founder : Diameter Eight
+</div>
+
 </div>
     <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
 
 <script>
 
 particlesJS("particles-js",{
+
 particles:{
 number:{value:80},
 color:{value:"#00ffff"},
 shape:{type:"circle"},
 opacity:{value:0.5},
 size:{value:3},
+
 line_linked:{
 enable:true,
 distance:150,
 color:"#00ffff",
-opacity:0.3,
+opacity:0.4,
 width:1
 },
+
 move:{
 enable:true,
 speed:2
 }
+
 }
+
 })
+
+</script>
+    <script>
 
 const TELEGRAM="angsthtun"
 
 let cart={}
 let currentGame=""
 
-let data=JSON.parse(localStorage.getItem("gameData"))||{
+let data={
 
 mlbb:{
 title:"Mobile Legends",
-icon:"https://seeklogo.com/images/M/mobile-legends-logo-7B7E78F41A-seeklogo.com.png",
-image:"Screenshot_2026-03-08-16-42-57-262_com.instagram.android_1772964798019edit.jpg">
+icon:"https://seeklogo.com/images/M/mobile-legends-logo.png",
+image:"https://images8.alphacoders.com/136/1364527.jpeg",
+
 items:[
 {name:"Weekly Pass",price:5700},
 {name:"50 Diamonds",price:3100},
 {name:"150 Diamonds",price:9000}
 ]
-}
+ },
+  genshin:{
+    title:"Genshin Impact",
+    icon:"https://upload.wikimedia.org/wikipedia/en/0/0d/Genshin_Impact_logo.svg",
+    image:"https://images8.alphacoders.com/110/1108096.jpg",
+    items:[
+      {name:"Blessing",price:13800},
+      {name:"60 Genesis Crystal",price:2750},
+      {name:"300+30 Genesis Crystal",price:13800},
+      {name:"980+110 Genesis Crystal",price:42000},
+      {name:"1980+260 Genesis Crystal",price:87250},
+      {name:"3280+600 Genesis Crystal",price:143000},
+      {name:"6480+1600 Genesis Crystal",price:273000}
+    ]
+  },
+
+  starrail:{
+    title:"Honkai: Star Rail",
+    icon:"https://upload.wikimedia.org/wikipedia/en/6/6d/Honkai_Star_Rail_logo.png",
+    image:"https://images6.alphacoders.com/131/1318293.jpeg",
+    items:[
+      {name:"60 Oneiric Shard",price:2800},
+      {name:"330 Oneiric Shard",price:14000},
+      {name:"1090 Oneiric Shard",price:42500},
+      {name:"2240 Oneiric Shard",price:84800},
+      {name:"3880 Oneiric Shard",price:144800},
+      {name:"8080 Oneiric Shard",price:272800},
+      {name:"Express Supply Pass",price:13800}
+    ]
+  },
+
+  arena:{
+    title:"Arena Breakout",
+    icon:"https://seeklogo.com/images/A/arena-breakout-logo.png",
+    image:"https://images5.alphacoders.com/131/1316943.jpeg",
+    items:[
+      {name:"66 Bonds",price:3500},
+      {name:"335 Bonds",price:17600},
+      {name:"675 Bonds",price:35000},
+      {name:"1690 Bonds",price:85600},
+      {name:"3400 Bonds",price:171200},
+      {name:"6820 Bonds",price:329500},
+      {name:"Beginner Select",price:2700},
+      {name:"Bulletproof Case (30D)",price:8000},
+      {name:"Composite Case (30D)",price:24100},
+      {name:"Advanced Battle Pass",price:13700},
+      {name:"Premium Battle Pass",price:40000}
+    ]
+  }
 
 }
+
 
 const menu=document.getElementById("menu")
 
@@ -326,10 +328,15 @@ for(let k in data){
 let g=data[k]
 
 menu.innerHTML+=`
+
 <div class="card" onclick="openGame('${k}')">
-<img src="${g.icon}">
+
+<img src="${g.icon}" onerror="this.src='https://via.placeholder.com/60'">
+
 <div>${g.title}</div>
+
 </div>
+
 `
 
 }
@@ -339,9 +346,8 @@ menu.innerHTML+=`
 function openGame(k){
 
 currentGame=k
-
 menu.style.display="none"
-document.getElementById("gamePage").style.display="grid"
+document.getElementById("gamePage").style.display="block"
 
 let g=data[k]
 
@@ -370,19 +376,25 @@ box.innerHTML=""
 data[currentGame].items.forEach((item,i)=>{
 
 box.innerHTML+=`
+
 <div class="item">
 
 <span>${item.name}</span>
 
 <div class="qty">
+
 <button onclick="changeQty(${i},-1)">-</button>
+
 <span id="q${i}">0</span>
+
 <button onclick="changeQty(${i},1)">+</button>
+
 </div>
 
 <span>${item.price}</span>
 
 </div>
+
 `
 
 })
@@ -414,7 +426,7 @@ let price=item.price*cart[i]
 
 total+=price
 
-html+=`<div>${item.name} x${cart[i]} - ${price}</div>`
+html+=`${item.name} x${cart[i]} - ${price} ks<br>`
 
 }
 
@@ -427,16 +439,11 @@ document.getElementById("total").textContent=total
 
 function sendOrder(){
 
-if(!currentGame){
-alert("Select a game first")
-return
-}
-
-let msg="🎮 Gamepay Hub Order\n\n"
+let msg="Gamepay Hub Order\n\n"
 
 msg+="Game: "+data[currentGame].title+"\n\n"
 
-msg+="Items:\n"
+msg+="Selective Items:\n"
 
 for(let i in cart){
 
@@ -450,48 +457,30 @@ msg+=item.name+" x"+cart[i]+"\n"
 
 }
 
-msg+="\nAccount:\n"+document.getElementById("account").value+"\n\n"
+let account=document.getElementById("account").value
+
+msg+="\nAccount: "+account+"\n"
 
 let pay=document.querySelector('input[name="pay"]:checked')
 
 if(pay){
 msg+="Payment: "+pay.value+"\n"
-}else{
-msg+="Payment: Not selected\n"
 }
 
-msg+="\nTotal: "+document.getElementById("total").textContent+" ks"
+let total=document.getElementById("total").textContent
+
+msg+="\nTotal Amount: "+total+" ks\n"
+
+navigator.clipboard.writeText(msg)
 
 window.open("https://t.me/"+TELEGRAM+"?text="+encodeURIComponent(msg))
 
 }
 
-function adminLogin(){
-
-let pass=prompt("Enter Admin Password")
-
-if(pass!=="aungshin12345xx"){
-alert("Wrong password")
-return
-}
-
-let edit=prompt("Edit JSON",JSON.stringify(data,null,2))
-
-if(edit){
-
-data=JSON.parse(edit)
-
-localStorage.setItem("gameData",JSON.stringify(data))
-
 renderMenu()
 
-}
+</script>
 
-}
-
-renderMenu()
-
- </script>
 </body>
 </html>
     
