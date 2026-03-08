@@ -4,6 +4,11 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Gamepay Hub</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
   <style>
     *{
       margin:0;
@@ -11,425 +16,937 @@
       box-sizing:border-box;
     }
 
+    :root{
+      --bg1:#08142e;
+      --bg2:#0f2c62;
+      --bg3:#14b8ff;
+      --card:#0d2e68cc;
+      --card2:#123a82;
+      --line:#4ecbff55;
+      --text:#ffffff;
+      --soft:#dff7ff;
+      --yellow:#ffd93b;
+      --cyan:#12d7ff;
+      --cyan2:#63f0ff;
+      --deep:#041634;
+      --green:#57ff9c;
+      --danger:#ff7b7b;
+      --shadow:0 10px 30px rgba(0,0,0,0.28);
+    }
+
+    html{
+      scroll-behavior:smooth;
+    }
+
     body{
-      font-family: Arial, sans-serif;
-      background: linear-gradient(135deg, #19d8ff, #00bfff, #35cfff);
-      color: white;
-      min-height: 100vh;
+      font-family:'Poppins',sans-serif;
+      color:var(--text);
+      min-height:100vh;
+      background:
+        radial-gradient(circle at top left, #1ccfff 0%, transparent 25%),
+        radial-gradient(circle at top right, #0ca8ff 0%, transparent 22%),
+        linear-gradient(135deg, var(--bg1), var(--bg2) 55%, #0a5ca8 100%);
+      overflow-x:hidden;
+      position:relative;
+    }
+
+    #particles-js{
+      position:fixed;
+      inset:0;
+      z-index:-2;
+    }
+
+    .bg-glow{
+      position:fixed;
+      width:420px;
+      height:420px;
+      border-radius:50%;
+      filter:blur(80px);
+      z-index:-1;
+      opacity:.22;
+      pointer-events:none;
+    }
+
+    .bg-glow.one{
+      background:#1bd9ff;
+      top:-120px;
+      left:-100px;
+    }
+
+    .bg-glow.two{
+      background:#4d72ff;
+      bottom:-120px;
+      right:-100px;
     }
 
     .container{
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 20px;
+      max-width:1220px;
+      margin:0 auto;
+      padding:22px 16px 40px;
     }
 
     .header{
-      background: #082f6b;
-      border: 2px solid #031b44;
-      border-radius: 24px;
-      padding: 28px 16px;
-      text-align: center;
-      box-shadow: 0 0 18px rgba(0,0,0,0.25);
-      margin-bottom: 24px;
+      position:relative;
+      overflow:hidden;
+      background:linear-gradient(135deg, rgba(8,34,85,.95), rgba(15,70,149,.88));
+      border:1px solid rgba(255,255,255,0.14);
+      border-radius:28px;
+      padding:28px 18px;
+      text-align:center;
+      box-shadow:var(--shadow);
+      backdrop-filter:blur(12px);
+      margin-bottom:22px;
+    }
+
+    .header::before{
+      content:"";
+      position:absolute;
+      width:240px;
+      height:240px;
+      background:radial-gradient(circle, rgba(255,217,59,.18), transparent 70%);
+      top:-80px;
+      left:-50px;
+      pointer-events:none;
+    }
+
+    .header::after{
+      content:"";
+      position:absolute;
+      width:240px;
+      height:240px;
+      background:radial-gradient(circle, rgba(18,215,255,.18), transparent 70%);
+      bottom:-100px;
+      right:-50px;
+      pointer-events:none;
     }
 
     .header h1{
-      color: #ffd900;
-      font-size: 42px;
-      text-shadow: 0 0 8px #ffd900, 0 0 18px #ffd900, 0 0 28px #fff176;
+      font-size:clamp(32px, 6vw, 56px);
+      line-height:1.1;
+      color:var(--yellow);
+      text-shadow:
+        0 0 10px rgba(255,217,59,.7),
+        0 0 24px rgba(255,217,59,.45);
+      letter-spacing:.5px;
+      margin-bottom:10px;
+      position:relative;
+      z-index:1;
     }
 
     .header p{
-      margin-top: 10px;
-      font-size: 24px;
-      color: #ffe866;
-      text-shadow: 0 0 8px #ffd900;
+      color:#eefcff;
+      font-size:clamp(15px, 3vw, 22px);
+      opacity:.95;
+      position:relative;
+      z-index:1;
     }
-.app-grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(140px,1fr));
-  gap:16px;
-}
-    .app-card img{
-  width:60px;
-  height:60px;
-  object-fit:contain;
-  margin-bottom:10px;
+
+    .banner{
+      position:relative;
+      border-radius:24px;
+      overflow:hidden;
+      margin-bottom:24px;
+      box-shadow:var(--shadow);
+      border:1px solid rgba(255,255,255,.14);
+      background:#0b2758;
+    }
+
+    .banner img{
+      width:100%;
+      height:min(44vw, 360px);
+      min-height:190px;
+      object-fit:cover;
+      display:block;
+      transform:scale(1.02);
+    }
+
+    .banner-overlay{
+      position:absolute;
+      inset:0;
+      background:
+        linear-gradient(90deg, rgba(6,18,47,.9) 0%, rgba(6,18,47,.25) 48%, rgba(6,18,47,.12) 100%);
+      display:flex;
+      align-items:flex-end;
+      padding:22px;
+    }
+
+    .banner-text{
+      max-width:560px;
+    }
+
+    .banner-badge{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:8px 14px;
+      border-radius:999px;
+      background:rgba(18,215,255,.15);
+      border:1px solid rgba(99,240,255,.35);
+      color:#dffdff;
+      font-size:13px;
+      font-weight:600;
+      margin-bottom:12px;
+      backdrop-filter:blur(6px);
+    }
+
+    .banner-text h2{
+      font-size:clamp(24px, 5vw, 42px);
+      color:#fff;
+      line-height:1.1;
+      margin-bottom:8px;
+      text-shadow:0 3px 18px rgba(0,0,0,.35);
+    }
+
+    .banner-text p{
+      font-size:14px;
+      color:#ecfbff;
+      opacity:.95;
+    }
+
+    .section-title{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      margin:6px 0 16px;
+      flex-wrap:wrap;
+    }
+
+    .section-title h3{
+      font-size:22px;
+      color:#f4feff;
+    }
+
+    .section-title span{
+      font-size:13px;
+      color:#d6f6ff;
+      opacity:.9;
+    }
+
+    .app-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+      gap:18px;
     }
 
     .app-card{
-      background: #08397f;
-      border: 2px solid #031b44;
-      border-radius: 20px;
-      padding: 24px 16px;
-      text-align: center;
-      font-size: 20px;
-      font-weight: bold;
-      cursor: pointer;
-      transition: 0.25s;
-      box-shadow: 0 0 14px rgba(0,0,0,0.2);
+      position:relative;
+      overflow:hidden;
+      border-radius:24px;
+      padding:20px 16px 18px;
+      background:linear-gradient(180deg, rgba(17,63,136,.88), rgba(9,39,90,.95));
+      border:1px solid rgba(255,255,255,.12);
+      text-align:center;
+      cursor:pointer;
+      transition:transform .28s ease, box-shadow .28s ease, border-color .28s ease;
+      transform-style:preserve-3d;
+      box-shadow:0 10px 24px rgba(0,0,0,.24);
+      backdrop-filter:blur(12px);
+      min-height:192px;
+    }
+
+    .app-card::before{
+      content:"";
+      position:absolute;
+      inset:-1px;
+      border-radius:24px;
+      padding:1px;
+      background:linear-gradient(135deg, rgba(99,240,255,.65), rgba(255,217,59,.35), transparent 55%);
+      -webkit-mask:
+        linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
+      -webkit-mask-composite:xor;
+      mask-composite:exclude;
+      pointer-events:none;
+      opacity:.9;
+    }
+
+    .app-card::after{
+      content:"";
+      position:absolute;
+      top:-60px;
+      right:-60px;
+      width:130px;
+      height:130px;
+      background:radial-gradient(circle, rgba(255,255,255,.18), transparent 70%);
+      border-radius:50%;
+      pointer-events:none;
     }
 
     .app-card:hover{
-      transform: translateY(-4px);
-      background: #0a4598;
+      transform:translateY(-8px) rotateX(6deg) rotateY(-5deg);
+      box-shadow:
+        0 20px 40px rgba(0,0,0,.34),
+        0 0 24px rgba(18,215,255,.22);
+      border-color:rgba(99,240,255,.45);
+    }
+
+    .app-icon-wrap{
+      width:88px;
+      height:88px;
+      margin:0 auto 14px;
+      border-radius:24px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background:linear-gradient(135deg, rgba(18,215,255,.18), rgba(255,255,255,.08));
+      border:1px solid rgba(255,255,255,.16);
+      box-shadow:inset 0 0 18px rgba(255,255,255,.08);
+      transform:translateZ(20px);
+    }
+
+    .app-card img{
+      width:58px;
+      height:58px;
+      object-fit:contain;
+      filter:drop-shadow(0 6px 12px rgba(0,0,0,.35));
+    }
+
+    .app-name{
+      font-size:17px;
+      font-weight:700;
+      color:#fff;
+      line-height:1.25;
+      transform:translateZ(18px);
+    }
+
+    .app-sub{
+      margin-top:6px;
+      font-size:12px;
+      color:#daf7ff;
+      opacity:.92;
+      transform:translateZ(14px);
     }
 
     .game-page{
-      display: none;
-      grid-template-columns: 1.5fr 1fr;
-      gap: 22px;
-      margin-top: 8px;
+      display:none;
+      grid-template-columns:1.55fr 1fr;
+      gap:22px;
+      margin-top:8px;
+      animation:fadeIn .35s ease;
     }
 
     .panel{
-      background: #082f6b;
-      border: 2px solid #031b44;
-      border-radius: 24px;
-      padding: 22px;
-      box-shadow: 0 0 16px rgba(0,0,0,0.2);
-    }
-
-    .game-title{
-      color: #ffd900;
-      font-size: 34px;
-      text-shadow: 0 0 8px #ffd900;
-      margin-bottom: 18px;
+      background:linear-gradient(180deg, rgba(11,45,103,.9), rgba(6,28,67,.96));
+      border-radius:26px;
+      border:1px solid rgba(255,255,255,.12);
+      padding:20px;
+      box-shadow:var(--shadow);
+      backdrop-filter:blur(12px);
     }
 
     .top-bar{
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 12px;
-      margin-bottom: 18px;
-      flex-wrap: wrap;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:12px;
+      flex-wrap:wrap;
+      margin-bottom:16px;
+    }
+
+    .game-title{
+      font-size:clamp(24px, 4vw, 36px);
+      font-weight:800;
+      color:var(--yellow);
+      text-shadow:0 0 12px rgba(255,217,59,.35);
+      line-height:1.15;
+    }
+
+    .top-actions{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+
+    .back-btn,
+    .stock-btn{
+      border:none;
+      outline:none;
+      cursor:pointer;
+      border-radius:14px;
+      padding:12px 16px;
+      font-size:14px;
+      font-weight:700;
+      transition:transform .2s ease, box-shadow .25s ease, background .25s ease;
     }
 
     .back-btn{
-      background: #12d7ff;
-      color: #04204e;
-      border: none;
-      border-radius: 12px;
-      padding: 12px 18px;
-      font-weight: bold;
-      font-size: 15px;
-      cursor: pointer;
-      box-shadow: 0 0 12px rgba(18,215,255,0.8);
+      color:var(--deep);
+      background:linear-gradient(135deg, #ffe56c, #ffc400);
+      box-shadow:0 0 18px rgba(255,217,59,.35);
+    }
+
+    .stock-btn{
+      color:var(--deep);
+      background:linear-gradient(135deg, #63f0ff, #12d7ff);
+      box-shadow:0 0 18px rgba(18,215,255,.35);
+    }
+
+    .back-btn:hover,
+    .stock-btn:hover,
+    .telegram-btn:hover,
+    .save-stock-btn:hover,
+    .cancel-stock-btn:hover{
+      transform:translateY(-2px);
     }
 
     .preview-box{
-      width: 100%;
-      border-radius: 18px;
-      overflow: hidden;
-      background: #0a4598;
-      border: 2px solid #031b44;
-      margin-bottom: 18px;
+      position:relative;
+      border-radius:22px;
+      overflow:hidden;
+      background:#0a285f;
+      border:1px solid rgba(255,255,255,.1);
+      margin-bottom:16px;
+      min-height:220px;
     }
 
     .preview-box img{
-      width: 100%;
-      display: block;
-      max-height: 360px;
-      object-fit: cover;
+      width:100%;
+      height:min(48vw, 360px);
+      min-height:220px;
+      object-fit:cover;
+      display:block;
+    }
+
+    .preview-badge{
+      position:absolute;
+      left:14px;
+      bottom:14px;
+      background:rgba(4,22,52,.72);
+      border:1px solid rgba(255,255,255,.12);
+      color:#fff;
+      padding:8px 12px;
+      font-size:13px;
+      font-weight:600;
+      border-radius:999px;
+      backdrop-filter:blur(8px);
     }
 
     .section-label{
-      color: #bfefff;
-      font-size: 18px;
-      margin-bottom: 12px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-bottom:12px;
+    }
+
+    .section-label strong{
+      color:#f7feff;
+      font-size:18px;
+    }
+
+    .section-label span{
+      color:#caf5ff;
+      font-size:13px;
     }
 
     .items{
-      display: grid;
-      gap: 12px;
+      display:grid;
+      gap:12px;
     }
 
     .item{
-      background: #0a4598;
-      border: 1px solid #04204e;
-      border-radius: 16px;
-      padding: 15px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 12px;
-      flex-wrap: wrap;
+      background:linear-gradient(180deg, rgba(13,67,149,.88), rgba(8,42,99,.96));
+      border:1px solid rgba(255,255,255,.1);
+      border-radius:18px;
+      padding:14px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:12px;
+      transition:border-color .2s ease, transform .2s ease, box-shadow .25s ease;
+    }
+
+    .item:hover{
+      border-color:rgba(99,240,255,.34);
+      transform:translateY(-1px);
+      box-shadow:0 10px 20px rgba(0,0,0,.18);
     }
 
     .item label{
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      cursor: pointer;
-      flex: 1;
-      min-width: 220px;
-      font-size: 18px;
+      display:flex;
+      align-items:center;
+      gap:12px;
+      flex:1;
+      min-width:220px;
+      cursor:pointer;
+      font-size:16px;
+      color:#fff;
+      font-weight:500;
     }
 
     .item input[type="checkbox"],
     .payment-option input[type="radio"]{
-      width: 18px;
-      height: 18px;
-      accent-color: #12d7ff;
+      width:18px;
+      height:18px;
+      accent-color:#12d7ff;
+      cursor:pointer;
+      flex-shrink:0;
     }
 
     .price{
-      color: #ffe866;
-      font-size: 18px;
-      font-weight: bold;
+      color:#ffe56c;
+      font-size:17px;
+      font-weight:800;
+      white-space:nowrap;
     }
 
     .cart-title{
-      color: #ffd900;
-      font-size: 30px;
-      text-shadow: 0 0 8px #ffd900;
-      margin-bottom: 16px;
+      font-size:28px;
+      color:var(--yellow);
+      text-shadow:0 0 10px rgba(255,217,59,.35);
+      margin-bottom:14px;
+      font-weight:800;
     }
 
     .cart-list{
-      min-height: 120px;
-      background: #0a4598;
-      border-radius: 16px;
-      padding: 14px;
-      margin-bottom: 16px;
+      min-height:120px;
+      background:rgba(9,48,112,.65);
+      border:1px solid rgba(255,255,255,.08);
+      border-radius:18px;
+      padding:14px;
+      margin-bottom:14px;
     }
 
     .cart-empty{
-      color: #d9f8ff;
+      color:#d9f8ff;
+      opacity:.92;
+      font-size:14px;
     }
 
     .cart-row{
-      display: flex;
-      justify-content: space-between;
-      gap: 10px;
-      padding: 10px 0;
-      border-bottom: 1px solid rgba(255,255,255,0.14);
-      font-size: 15px;
+      display:flex;
+      justify-content:space-between;
+      gap:10px;
+      padding:10px 0;
+      border-bottom:1px solid rgba(255,255,255,.1);
+      font-size:14px;
+      color:#fff;
     }
 
     .cart-row:last-child{
-      border-bottom: none;
+      border-bottom:none;
+    }
+
+    .cart-row span:last-child{
+      color:#ffe56c;
+      font-weight:700;
+      white-space:nowrap;
     }
 
     .total{
-      font-size: 20px;
-      color: #ffe866;
-      font-weight: bold;
-      margin-bottom: 18px;
+      font-size:20px;
+      color:#ffe56c;
+      font-weight:800;
+      margin-bottom:16px;
+      text-shadow:0 0 10px rgba(255,217,59,.2);
     }
 
     .input-label{
-      display: block;
-      margin-bottom: 8px;
-      font-weight: bold;
-      font-size: 18px;
+      display:block;
+      margin-bottom:8px;
+      font-size:16px;
+      font-weight:700;
+      color:#f8feff;
     }
 
     textarea{
-      width: 100%;
-      min-height: 130px;
-      border: none;
-      outline: none;
-      resize: vertical;
-      border-radius: 16px;
-      padding: 14px;
-      font-size: 16px;
-      background: #2ce7ff;
-      color: #04204e;
-      margin-bottom: 18px;
-      box-shadow: 0 0 14px rgba(44,231,255,0.65);
+      width:100%;
+      min-height:120px;
+      border:none;
+      outline:none;
+      resize:vertical;
+      border-radius:18px;
+      padding:14px;
+      font-size:15px;
+      background:linear-gradient(180deg, #9ef5ff, #6ce9ff);
+      color:#04204e;
+      margin-bottom:16px;
+      box-shadow:0 0 18px rgba(44,231,255,.18);
+      font-family:'Poppins',sans-serif;
+      font-weight:500;
     }
 
     .payment-box{
-      background: #0a4598;
-      border-radius: 16px;
-      padding: 14px;
-      margin-bottom: 18px;
+      background:rgba(9,48,112,.65);
+      border:1px solid rgba(255,255,255,.08);
+      border-radius:18px;
+      padding:14px;
+      margin-bottom:16px;
     }
 
     .payment-title{
-      font-size: 18px;
-      font-weight: bold;
-      margin-bottom: 12px;
-      color: #ffffff;
+      font-size:16px;
+      font-weight:700;
+      margin-bottom:10px;
+      color:#fff;
     }
 
     .payment-options{
-      display: grid;
-      gap: 10px;
+      display:grid;
+      gap:10px;
     }
 
     .payment-option{
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-size: 17px;
+      display:flex;
+      align-items:center;
+      gap:10px;
+      font-size:15px;
+      color:#ecfbff;
+      cursor:pointer;
     }
 
     .telegram-btn{
-  width:100%;
-  border:none;
-  border-radius:16px;
-  padding:15px 18px;
-  background:#12d7ff;
-  color:#04204e;
-  font-size:18px;
-  font-weight:bold;
-  cursor:pointer;
-
-  box-shadow:
-  0 0 10px #12d7ff,
-  0 0 20px #12d7ff,
-  0 0 40px #12d7ff;
-
-  animation: glow 2s infinite alternate;
-}
-
-@keyframes glow{
-  from{
-    box-shadow:
-    0 0 10px #12d7ff,
-    0 0 20px #12d7ff;
-  }
-
-  to{
-    box-shadow:
-    0 0 25px #12d7ff,
-    0 0 50px #12d7ff;
-  }
-}
-
-    .telegram-btn:hover{
-      transform: translateY(-2px);
+      width:100%;
+      border:none;
+      border-radius:18px;
+      padding:15px 18px;
+      background:linear-gradient(135deg, #63f0ff, #12d7ff);
+      color:#04204e;
+      font-size:18px;
+      font-weight:800;
+      cursor:pointer;
+      box-shadow:
+        0 0 12px rgba(18,215,255,.55),
+        0 0 28px rgba(18,215,255,.25);
+      animation:glow 2s infinite alternate;
+      transition:transform .2s ease, box-shadow .25s ease;
+      margin-bottom:10px;
     }
 
     .telegram-id{
-      margin-top: 10px;
-      text-align: center;
-      color: #dffcff;
-      font-size: 15px;
+      text-align:center;
+      color:#dffcff;
+      font-size:14px;
     }
-.footer{
-  text-align:center;
-  padding:20px;
-  font-size:18px;
-  color:#ffd900;
-  text-shadow:0 0 8px #ffd900,0 0 18px #ffd900;
 
-  position:fixed;
-  bottom:10px;
-  width:100%;
-}
-    @media (max-width: 900px){
+    .footer{
+      text-align:center;
+      padding:28px 14px 10px;
+      font-size:14px;
+      color:#d9f7ff;
+      opacity:.92;
+    }
+
+    .modal{
+      position:fixed;
+      inset:0;
+      background:rgba(1,8,24,.72);
+      backdrop-filter:blur(8px);
+      display:none;
+      align-items:center;
+      justify-content:center;
+      padding:18px;
+      z-index:99;
+    }
+
+    .modal.active{
+      display:flex;
+      animation:fadeIn .22s ease;
+    }
+
+    .modal-box{
+      width:min(720px, 100%);
+      background:linear-gradient(180deg, rgba(11,45,103,.97), rgba(6,28,67,.98));
+      border:1px solid rgba(255,255,255,.12);
+      border-radius:24px;
+      box-shadow:0 20px 40px rgba(0,0,0,.35);
+      padding:18px;
+    }
+
+    .modal-top{
+      display:flex;
+      justify-content:space-between;
+      gap:12px;
+      align-items:center;
+      margin-bottom:14px;
+      flex-wrap:wrap;
+    }
+
+    .modal-top h3{
+      font-size:22px;
+      color:var(--yellow);
+    }
+
+    .close-modal{
+      border:none;
+      background:#ff7b7b;
+      color:#fff;
+      padding:10px 14px;
+      border-radius:12px;
+      font-weight:700;
+      cursor:pointer;
+    }
+
+    .stock-help{
+      font-size:13px;
+      color:#d8f7ff;
+      margin-bottom:10px;
+      line-height:1.6;
+    }
+
+    .stock-textarea{
+      width:100%;
+      min-height:220px;
+      background:#eefdff;
+      color:#05214e;
+      border:none;
+      outline:none;
+      border-radius:18px;
+      padding:14px;
+      font-size:14px;
+      font-family:Consolas, monospace;
+      margin-bottom:14px;
+      resize:vertical;
+    }
+
+    .stock-actions{
+      display:flex;
+      gap:10px;
+      justify-content:flex-end;
+      flex-wrap:wrap;
+    }
+
+    .save-stock-btn,
+    .cancel-stock-btn{
+      border:none;
+      border-radius:14px;
+      padding:12px 16px;
+      font-size:14px;
+      font-weight:800;
+      cursor:pointer;
+      transition:transform .2s ease;
+    }
+
+    .save-stock-btn{
+      background:linear-gradient(135deg, #63f0ff, #12d7ff);
+      color:#04204e;
+    }
+
+    .cancel-stock-btn{
+      background:linear-gradient(135deg, #ffd86a, #ffbf00);
+      color:#04204e;
+    }
+
+    .loading-screen{
+      position:fixed;
+      inset:0;
+      background:radial-gradient(circle at center, #103a7a 0%, #07142d 70%);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      flex-direction:column;
+      gap:16px;
+      z-index:999;
+      transition:opacity .45s ease, visibility .45s ease;
+    }
+
+    .loading-screen.hide{
+      opacity:0;
+      visibility:hidden;
+      pointer-events:none;
+    }
+
+    .loading-logo{
+      width:92px;
+      height:92px;
+      border-radius:28px;
+      background:linear-gradient(135deg, rgba(18,215,255,.18), rgba(255,217,59,.14));
+      border:1px solid rgba(255,255,255,.14);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      box-shadow:
+        0 0 24px rgba(18,215,255,.2),
+        inset 0 0 24px rgba(255,255,255,.05);
+      font-size:40px;
+    }
+
+    .loading-title{
+      font-size:28px;
+      color:var(--yellow);
+      font-weight:800;
+      text-shadow:0 0 12px rgba(255,217,59,.28);
+    }
+
+    .loading-bar{
+      width:min(320px, 82vw);
+      height:12px;
+      border-radius:999px;
+      background:rgba(255,255,255,.08);
+      overflow:hidden;
+      border:1px solid rgba(255,255,255,.08);
+    }
+
+    .loading-bar span{
+      display:block;
+      width:0;
+      height:100%;
+      background:linear-gradient(90deg, #63f0ff, #12d7ff, #ffe56c);
+      border-radius:999px;
+      animation:loadingMove 2.2s ease forwards;
+      box-shadow:0 0 16px rgba(18,215,255,.55);
+    }
+
+    .loading-sub{
+      color:#d9f7ff;
+      font-size:14px;
+    }
+
+    @keyframes loadingMove{
+      0%{width:0;}
+      100%{width:100%;}
+    }
+
+    @keyframes glow{
+      from{
+        box-shadow:
+          0 0 12px rgba(18,215,255,.5),
+          0 0 28px rgba(18,215,255,.2);
+      }
+      to{
+        box-shadow:
+          0 0 18px rgba(18,215,255,.7),
+          0 0 38px rgba(18,215,255,.34);
+      }
+    }
+
+    @keyframes fadeIn{
+      from{
+        opacity:0;
+        transform:translateY(10px);
+      }
+      to{
+        opacity:1;
+        transform:translateY(0);
+      }
+    }
+
+    @media (max-width:960px){
       .game-page{
-        grid-template-columns: 1fr;
-      }
-
-      .header h1{
-        font-size: 34px;
-      }
-
-      .header p{
-        font-size: 20px;
-      }
-
-      .game-title{
-        font-size: 28px;
+        grid-template-columns:1fr;
       }
     }
+
     @media (max-width:700px){
+      .container{
+        padding:16px 12px 34px;
+      }
 
-.app-grid{
-grid-template-columns:1fr 1fr;
-}
+      .app-grid{
+        grid-template-columns:1fr 1fr;
+      }
 
-.header h1{
-font-size:28px;
-}
+      .app-card{
+        min-height:174px;
+        padding:18px 12px 16px;
+      }
 
-.header p{
-font-size:18px;
-}
+      .item{
+        flex-direction:column;
+        align-items:flex-start;
+      }
 
-.item{
-flex-direction:column;
-align-items:flex-start;
-}
+      .price{
+        align-self:flex-end;
+      }
 
-.price{
-align-self:flex-end;
-}
-#particles-js{
-position:fixed;
-width:100%;
-height:100%;
-top:0;
-left:0;
-z-index:-1;
-}
       .banner img{
-width:100%;
-border-radius:12px;
-margin-bottom:20px;
+        height:220px;
+      }
+
+      .preview-box img{
+        height:220px;
+      }
+    }
+
+    @media (max-width:480px){
+      .app-grid{
+        grid-template-columns:1fr 1fr;
+        gap:12px;
+      }
+
+      .app-name{
+        font-size:15px;
+      }
+
+      .app-sub{
+        font-size:11px;
+      }
+
+      .header{
+        padding:22px 14px;
+      }
+
+      .panel{
+        padding:16px;
       }
     }
   </style>
-  <footer class="footer">
-Founder: Diameter Eight
-  </footer>
 </head>
 <body>
   <div id="particles-js"></div>
+  <div class="bg-glow one"></div>
+  <div class="bg-glow two"></div>
 
-<div class="container">
+  <div id="loadingScreen" class="loading-screen">
+    <div class="loading-logo">🎮</div>
+    <div class="loading-title">Gamepay Hub</div>
+    <div class="loading-bar"><span></span></div>
+    <div class="loading-sub">Loading topup experience...</div>
+  </div>
+
   <div class="container">
-
     <div class="header">
       <h1>Gamepay Hub</h1>
-      <p>Mobile games Topup</p>
+      <p>Mobile Games Topup • Fast Order • Clean UI</p>
     </div>
-<!-- Banner -->
-<div class="banner">
-<img src="Screenshot_2026-03-08-16-42-57-262_com.instagram.android_1772964798019edit.jpg" alt="MLBB Banner">
-</div>
-<div id="gameMenu" class="app-grid">
 
-  <div class="app-card" onclick="showGame('mlbb')">
-    <img src="https://seeklogo.com/images/M/mobile-legends-logo-7B7E78F41A-seeklogo.com.png">
-    <span>Mobile Legends</span>
-  </div>
+    <div class="banner">
+      <img id="mainBanner" src="https://images8.alphacoders.com/136/1364527.jpeg" alt="Main Banner">
+      <div class="banner-overlay">
+        <div class="banner-text">
+          <div class="banner-badge">⚡ Featured Topup Store</div>
+          <h2>Fast, Clean and Easy Game Topup</h2>
+          <p>Choose your game, select items, fill account info, and order directly via Telegram.</p>
+        </div>
+      </div>
+    </div>
 
-  <div class="app-card" onclick="showGame('genshin')">
-    <img src="https://seeklogo.com/images/G/genshin-impact-logo-1A8E3F7F0B-seeklogo.com.png">
-    <span>Genshin Impact</span>
-  </div>
+    <div id="menuSection">
+      <div class="section-title">
+        <h3>Choose Your Game</h3>
+        <span>Tap any card to open price list</span>
+      </div>
 
-  <div class="app-card" onclick="showGame('hsr')">
-    <img src="https://cdn-icons-png.flaticon.com/512/686/686589.png">
-    <span>Honkai Star Rail</span>
-  </div>
+      <div id="gameMenu" class="app-grid"></div>
+    </div>
 
-  <div class="app-card" onclick="showGame('zzz')">
-    <img src="https://cdn-icons-png.flaticon.com/512/906/906175.png">
-    <span>Zenless Zero Zone</span>
-  </div>
-
-</div>
+    <div id="gameMenu" class="app-grid"></div>
+    </div>
 
     <div id="gamePage" class="game-page">
       <div class="panel">
         <div class="top-bar">
-          <div id="gameTitle" class="game-title">Mobile Legends Top up</div>
-          <button class="back-btn" onclick="backToMenu()">Back to Games</button>
+          <div id="gameTitle" class="game-title">Game Title</div>
+
+          <div class="top-actions">
+            <button class="stock-btn" onclick="openStockEditor()">Edit Stock / Items</button>
+            <button class="back-btn" onclick="backToMenu()">Back to Games</button>
+          </div>
         </div>
 
         <div class="preview-box">
           <img id="gameImage" src="" alt="Game Image">
+          <div class="preview-badge">Price List Preview</div>
         </div>
 
-        <div class="section-label">Price</div>
+        <div class="section-label">
+          <strong>Price List</strong>
+          <span>Tick items to add into order cart</span>
+        </div>
+
         <div id="itemsContainer" class="items"></div>
       </div>
 
@@ -464,104 +981,249 @@ Name:"></textarea>
         <div class="telegram-id">@angsthtun</div>
       </div>
     </div>
+
+    <div class="footer">
+      Founder: Diameter Eight
+    </div>
   </div>
 
+  <div id="stockModal" class="modal">
+    <div class="modal-box">
+      <div class="modal-top">
+        <h3>Edit Game Data</h3>
+        <button class="close-modal" onclick="closeStockEditor()">Close</button>
+      </div>
+
+      <div class="stock-help">
+        ဒီ box ထဲမှာ current game ရဲ့ title, image, items တွေကိုပြင်လို့ရပါတယ်။<br>
+        Format က JSON ဖြစ်ရမယ်။ ပြင်ပြီး <strong>Save Changes</strong> နှိပ်လိုက်ရင် တန်း update ဖြစ်မယ်။
+      </div>
+
+      <textarea id="stockEditor" class="stock-textarea"></textarea>
+
+      <div class="stock-actions">
+        <button class="cancel-stock-btn" onclick="closeStockEditor()">Cancel</button>
+        <button class="save-stock-btn" onclick="saveStockEditor()">Save Changes</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+
   <script>
+    particlesJS("particles-js", {
+      particles: {
+        number: {
+          value: 75,
+          density: {
+            enable: true,
+            value_area: 900
+          }
+        },
+        color: {
+          value: ["#63f0ff", "#12d7ff", "#ffd93b", "#ffffff"]
+        },
+        shape: {
+          type: "circle"
+        },
+        opacity: {
+          value: 0.45,
+          random: true
+        },
+        size: {
+          value: 3.2,
+          random: true
+        },
+        line_linked: {
+          enable: true,
+          distance: 145,
+          color: "#73eaff",
+          opacity: 0.22,
+          width: 1
+        },
+        move: {
+          enable: true,
+          speed: 1.8,
+          direction: "none",
+          random: false,
+          straight: false,
+          out_mode: "out",
+          bounce: false
+        }
+      },
+      interactivity: {
+        detect_on: "canvas",
+        events: {
+          onhover: {
+            enable: true,
+            mode: "grab"
+          },
+          onclick: {
+            enable: true,
+            mode: "push"
+          },
+          resize: true
+        },
+        modes: {
+          grab: {
+            distance: 160,
+            line_linked: {
+              opacity: 0.45
+            }
+          },
+          push: {
+            particles_nb: 4
+          }
+        }
+      },
+      retina_detect: true
+    });
+
+    const TELEGRAM_USERNAME = "angsthtun";
+
     const gameData = {
       mlbb: {
         title: "Mobile Legends Top up",
-          image: "Screenshot_2026-03-08-16-42-57-262_com.instagram.android_1772964798019edit.jpg",
-style="width:100%; border-radius:10px;">
+        subtitle: "Diamonds • Weekly Pass • Twilight Pass",
+        icon: "https://seeklogo.com/images/M/mobile-legends-logo-7B7E78F41A-seeklogo.com.png",
+        image: "https://images8.alphacoders.com/136/1364527.jpeg",
         items: [
           { name: "📅 Weekly Pass", price: 5700 },
           { name: "2x💎 50+50", price: 3100 },
           { name: "2x💎 150+150", price: 9000 },
           { name: "2x💎 250+250", price: 14800 },
           { name: "2x💎 500+500", price: 30000 },
-          { name: "✉️ Twilight pass", price: 32300 },
-          { name: "📆📆📆 3wp+11💎", price: 17900 },
-          { name: "📆📆 2wp + 86", price: 16350 },
-          { name: "📆 1wp + 172💎", price: 15400 },
+          { name: "✉️ Twilight Pass", price: 32300 },
+          { name: "📆📆📆 3WP + 11💎", price: 17900 },
+          { name: "📆📆 2WP + 86💎", price: 16350 },
+          { name: "📆 1WP + 172💎", price: 15400 },
           { name: "💎 343", price: 19150 },
           { name: "💎 279", price: 15700 }
         ]
       },
       genshin: {
-        title: "GENSHIN IMPACT",
-        image: "https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=1200&q=80",
+        title: "Genshin Impact",
+        subtitle: "Genesis Crystal • Blessing",
+        icon: "https://seeklogo.com/images/G/genshin-impact-logo-1A8E3F7F0B-seeklogo.com.png",
+        image: "https://images6.alphacoders.com/112/1123018.jpg",
         items: [
-          { name: "Blessing", price: 13800 },
+          { name: "Blessing of the Welkin Moon", price: 13800 },
           { name: "Genesis Crystal 60", price: 2750 },
           { name: "Genesis Crystal 300+30", price: 13800 },
           { name: "Genesis Crystal 980+110", price: 42000 },
-          { name: "Genesis Crystal 1989+260", price: 87250 },
-          { name: "Genesis Crystal 3280+60", price: 143000 },
-          { name: "Genesis Crystal 6489+1600", price: 273000 }
+          { name: "Genesis Crystal 1980+260", price: 87250 },
+          { name: "Genesis Crystal 3280+600", price: 143000 },
+          { name: "Genesis Crystal 6480+1600", price: 273000 }
         ]
       },
+
       hsr: {
         title: "Honkai: Star Rail",
-        image: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=1200&q=80",
+        subtitle: "Oneiric Shard • Express Supply",
+        icon: "https://upload.wikimedia.org/wikipedia/en/8/8c/Honkai_Star_Rail.png",
+        image: "https://images7.alphacoders.com/131/1319123.jpeg",
         items: [
+          { name: "Express Supply Pass", price: 13800 },
           { name: "Oneiric Shard 60", price: 2800 },
           { name: "Oneiric Shard 330", price: 14000 },
           { name: "Oneiric Shard 1090", price: 42500 },
           { name: "Oneiric Shard 2240", price: 84800 },
           { name: "Oneiric Shard 3880", price: 144800 },
-          { name: "Oneiric Shard 8080", price: 272800 },
-          { name: "Express Supply", price: 13800 }
+          { name: "Oneiric Shard 8080", price: 272800 }
         ]
       },
+
       zzz: {
-        title: "Zenless Zero Zone",
-        image: "https://images.unsplash.com/photo-1560253023-3ec5d502959f?auto=format&fit=crop&w=1200&q=80",
+        title: "Zenless Zone Zero",
+        subtitle: "Monochrome • Membership",
+        icon: "https://upload.wikimedia.org/wikipedia/commons/8/8f/Zenless_Zone_Zero_logo.png",
+        image: "https://images6.alphacoders.com/135/1355398.jpeg",
         items: [
-          { name: "Coming Soon", price: 0 }
+          { name: "Inter-Knot Membership", price: 13800 },
+          { name: "Monochrome 60", price: 2800 },
+          { name: "Monochrome 300+30", price: 13800 },
+          { name: "Monochrome 980+110", price: 42000 },
+          { name: "Monochrome 1980+260", price: 87250 },
+          { name: "Monochrome 3280+600", price: 143000 },
+          { name: "Monochrome 6480+1600", price: 273000 }
         ]
       }
     };
 
     let currentGame = "";
+    const gameMenu = document.getElementById("gameMenu");
+    const gamePage = document.getElementById("gamePage");
+    const gameTitle = document.getElementById("gameTitle");
+    const gameImage = document.getElementById("gameImage");
+    const itemsContainer = document.getElementById("itemsContainer");
+    const cartList = document.getElementById("cartList");
+    const totalPrice = document.getElementById("totalPrice");
+    const accountInfo = document.getElementById("accountInfo");
+    const stockModal = document.getElementById("stockModal");
+    const stockEditor = document.getElementById("stockEditor");
 
-    function showGame(gameKey){
+    function renderGameMenu() {
+      gameMenu.innerHTML = "";
+
+      Object.keys(gameData).forEach((key) => {
+        const game = gameData[key];
+
+        const card = document.createElement("div");
+        card.className = "app-card";
+        card.setAttribute("onclick", `showGame('${key}')`);
+
+        card.innerHTML = `
+          <div class="app-icon-wrap">
+            <img src="${game.icon}" alt="${game.title}">
+          </div>
+          <div class="app-name">${game.title}</div>
+          <div class="app-sub">${game.subtitle || "Tap to open price list"}</div>
+        `;
+
+        gameMenu.appendChild(card);
+      });
+    }
+
+    function showGame(gameKey) {
       currentGame = gameKey;
 
-      document.getElementById("gameMenu").style.display = "none";
-      document.getElementById("gamePage").style.display = "grid";
+      document.getElementById("menuSection").style.display = "none";
+      gamePage.style.display = "grid";
 
-      document.getElementById("gameTitle").textContent = gameData[gameKey].title;
-      document.getElementById("gameImage").src = gameData[gameKey].image;
-      document.getElementById("gameImage").alt = gameData[gameKey].title;
+      const game = gameData[gameKey];
+      gameTitle.textContent = game.title;
+      gameImage.src = game.image;
+      gameImage.alt = game.title;
 
       renderItems();
       clearCart();
+      window.scrollTo({ top: 0, behavior: "smooth" });
     }
 
-    function backToMenu(){
-      document.getElementById("gameMenu").style.display = "grid";
-      document.getElementById("gamePage").style.display = "none";
+    function backToMenu() {
+      document.getElementById("menuSection").style.display = "block";
+      gamePage.style.display = "none";
       clearCart();
+      window.scrollTo({ top: 0, behavior: "smooth" });
     }
 
-    function renderItems(){
-      const container = document.getElementById("itemsContainer");
+    function renderItems() {
       const items = gameData[currentGame].items;
+      itemsContainer.innerHTML = "";
 
-      container.innerHTML = "";
-
-      items.forEach((item) => {
+      items.forEach((item, index) => {
         const row = document.createElement("div");
         row.className = "item";
 
         row.innerHTML = `
           <label>
-            <input type="checkbox" class="item-check" data-name="${item.name}" data-price="${item.price}">
+            <input type="checkbox" class="item-check" data-index="${index}" data-name="${item.name}" data-price="${item.price}">
             <span>${item.name}</span>
           </label>
-          <div class="price">${item.price.toLocaleString()} ks</div>
+          <div class="price">${Number(item.price).toLocaleString()} ks</div>
         `;
-
-        container.appendChild(row);
+        
+        itemsContainer.appendChild(row);
       });
 
       document.querySelectorAll(".item-check").forEach(check => {
@@ -569,12 +1231,10 @@ style="width:100%; border-radius:10px;">
       });
     }
 
-    function updateCart(){
+    function updateCart() {
       const checkedItems = document.querySelectorAll(".item-check:checked");
-      const cartList = document.getElementById("cartList");
-      const totalPrice = document.getElementById("totalPrice");
 
-if(checkedItems.length=== 0){
+      if (checkedItems.length === 0) {
         cartList.innerHTML = `<div class="cart-empty">No items selected yet.</div>`;
         totalPrice.textContent = "0";
         return;
@@ -600,40 +1260,47 @@ if(checkedItems.length=== 0){
       totalPrice.textContent = total.toLocaleString();
     }
 
-    function clearCart(){
-      document.getElementById("cartList").innerHTML = `<div class="cart-empty">No items selected yet.</div>`;
-      document.getElementById("totalPrice").textContent = "0";
-      document.getElementById("accountInfo").value = "";
+    function clearCart() {
+      cartList.innerHTML = `<div class="cart-empty">No items selected yet.</div>`;
+      totalPrice.textContent = "0";
+      accountInfo.value = "";
 
-      const checks = document.querySelectorAll(".item-check");
-      checks.forEach(check => check.checked = false);
+      document.querySelectorAll(".item-check").forEach(check => {
+        check.checked = false;
+      });
 
-      const radios = document.querySelectorAll('input[name="paymentMethod"]');
-      radios.forEach(radio => radio.checked = false);
+      document.querySelectorAll('input[name="paymentMethod"]').forEach(radio => {
+        radio.checked = false;
+      });
     }
 
-    function sendTelegramOrder(){
+    function sendTelegramOrder() {
       const selectedItems = document.querySelectorAll(".item-check:checked");
-      const accountInfo = document.getElementById("accountInfo").value.trim();
+      const accountValue = accountInfo.value.trim();
       const paymentMethod = document.querySelector('input[name="paymentMethod"]:checked');
 
-      if(selectedItems.length === 0){
+      if (!currentGame) {
+        alert("Please select a game first.");
+        return;
+      }
+
+      if (selectedItems.length === 0) {
         alert("Please select at least one item.");
         return;
       }
 
-      if(accountInfo === ""){
+      if (accountValue === "") {
         alert("Please fill in account information.");
         return;
       }
 
-      if(!paymentMethod){
+      if (!paymentMethod) {
         alert("Please select a payment method.");
         return;
       }
 
       let total = 0;
-      let message = "Gamepay Hub Order\n\n";
+      let message = "🎮 Gamepay Hub Order\n\n";
       message += "Game: " + gameData[currentGame].title + "\n\n";
       message += "Selected Items:\n";
 
@@ -641,16 +1308,83 @@ if(checkedItems.length=== 0){
         const name = item.dataset.name;
         const price = Number(item.dataset.price);
         total += price;
-        message += (index + 1) + ". " + name + " - " + price + " ks\n";
+        message += (index + 1) + ". " + name + " - " + price.toLocaleString() + " ks\n";
       });
 
-      message += "\nTotal: " + total + " ks\n";
+      message += "\nTotal: " + total.toLocaleString() + " ks\n";
       message += "Payment Method: " + paymentMethod.value + "\n\n";
-      message += "Account Information:\n" + accountInfo;
+      message += "Account Information:\n" + accountValue;
 
-      const url = "https://t.me/angsthtun?text=" + encodeURIComponent(message);
+      const url = "https://t.me/" + TELEGRAM_USERNAME + "?text=" + encodeURIComponent(message);
       window.open(url, "_blank");
     }
+
+    function openStockEditor() {
+      if (!currentGame) return;
+
+      const game = gameData[currentGame];
+
+      const editableData = {
+        title: game.title,
+        subtitle: game.subtitle,
+        icon: game.icon,
+        image: game.image,
+        items: game.items
+      };
+
+      stockEditor.value = JSON.stringify(editableData, null, 2);
+      stockModal.classList.add("active");
+    }
+
+    function closeStockEditor() {
+      stockModal.classList.remove("active");
+    }
+
+    function saveStockEditor() {
+      if (!currentGame) return;
+
+      try {
+        const parsed = JSON.parse(stockEditor.value);
+
+        if (!parsed.title || !parsed.image || !Array.isArray(parsed.items)) {
+          alert("JSON format မှာ title, image, items ပါရမယ်.");
+          return;
+        }
+
+        gameData[currentGame] = {
+          title: parsed.title,
+          subtitle: parsed.subtitle || "Tap to open price list",
+          icon: parsed.icon || gameData[currentGame].icon,
+          image: parsed.image,
+          items: parsed.items.map(item => ({
+            name: item.name,
+            price: Number(item.price)
+          }))
+        };
+        renderGameMenu();
+        showGame(currentGame);
+        closeStockEditor();
+        alert("Game data updated successfully.");
+      } catch (error) {
+        alert("JSON format မှားနေပါတယ်. Comma, quotes, brackets စစ်ပါ.");
+      }
+    }
+
+    window.addEventListener("click", function(e) {
+      if (e.target === stockModal) {
+        closeStockEditor();
+      }
+    });
+
+    window.addEventListener("load", function() {
+      renderGameMenu();
+
+      setTimeout(() => {
+        document.getElementById("loadingScreen").classList.add("hide");
+      }, 1800);
+    });
   </script>
 </body>
 </html>
+        
+        
