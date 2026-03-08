@@ -1316,8 +1316,16 @@ Name:"></textarea>
       window.open(url, "_blank");
     }
 
-    function openStockEditor() {
+    function openStockEditor(){
+
   if (!currentGame) return;
+
+  const password = prompt("Enter admin password");
+
+  if(password !== "gamepay12345xx"){
+    alert("Access denied");
+    return;
+  }
 
   const game = gameData[currentGame];
 
@@ -1331,10 +1339,7 @@ Name:"></textarea>
 
   stockEditor.value = JSON.stringify(editableData, null, 2);
   stockModal.classList.add("active");
-    }
 
-      stockEditor.value = JSON.stringify(editableData, null, 2);
-      stockModal.classList.add("active");
     }
 
     function closeStockEditor() {
@@ -1372,11 +1377,13 @@ Name:"></textarea>
       }
     }
 
-    window.addEventListener("click", function(e) {
-      if (e.target === stockModal) {
-        closeStockEditor();
-      }
-    });
+   window.addEventListener("load", function() {
+
+  renderGameMenu();
+
+  document.getElementById("loadingScreen").classList.add("hide");
+
+}); 
 
     window.onload = function() {
 
