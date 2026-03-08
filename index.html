@@ -922,8 +922,7 @@
 
       <div id="gameMenu" class="app-grid"></div>
     </div>
-
-    <div id="gamePage" class="game-page">
+  <div id="gamePage" class="game-page">
       <div class="panel">
         <div class="top-bar">
           <div id="gameTitle" class="game-title">Game Title</div>
@@ -1085,7 +1084,7 @@ Name:"></textarea>
         icon: "https://seeklogo.com/images/M/mobile-legends-logo-7B7E78F41A-seeklogo.com.png",
         image: "https://images8.alphacoders.com/136/1364527.jpeg",
         items: [
-          { name: "📅 Weekly Pass", price: 5700 },
+                    { name: "📅 Weekly Pass", price: 5700 },
           { name: "2x💎 50+50", price: 3100 },
           { name: "2x💎 150+150", price: 9000 },
           { name: "2x💎 250+250", price: 14800 },
@@ -1098,7 +1097,8 @@ Name:"></textarea>
           { name: "💎 279", price: 15700 }
         ]
       },
-          genshin: {
+
+      genshin: {
         title: "Genshin Impact",
         subtitle: "Genesis Crystal • Blessing",
         icon: "https://seeklogo.com/images/G/genshin-impact-logo-1A8E3F7F0B-seeklogo.com.png",
@@ -1269,6 +1269,19 @@ Name:"></textarea>
       document.querySelectorAll('input[name="paymentMethod"]').forEach(radio => {
         radio.checked = false;
       });
+          }
+              function clearCart() {
+      cartList.innerHTML = `<div class="cart-empty">No items selected yet.</div>`;
+      totalPrice.textContent = "0";
+      accountInfo.value = "";
+
+      document.querySelectorAll(".item-check").forEach(check => {
+        check.checked = false;
+      });
+
+      document.querySelectorAll('input[name="paymentMethod"]').forEach(radio => {
+        radio.checked = false;
+      });
     }
 
     function sendTelegramOrder() {
@@ -1316,31 +1329,23 @@ Name:"></textarea>
       window.open(url, "_blank");
     }
 
-    function openStockEditor(){
+    function openStockEditor() {
+      if (!currentGame) return;
 
-  if (!currentGame) return;
+      const game = gameData[currentGame];
 
-  const password = prompt("Enter admin password");
+      const editableData = {
+        title: game.title,
+        subtitle: game.subtitle,
+        icon: game.icon,
+        image: game.image,
+        items: game.items
+      };
 
-  if(password !== "gamepay12345xx"){
-    alert("Access denied");
-    return;
-  }
-
-  const game = gameData[currentGame];
-
-  const editableData = {
-    title: game.title,
-    subtitle: game.subtitle,
-    icon: game.icon,
-    image: game.image,
-    items: game.items
-  };
-
-  stockEditor.value = JSON.stringify(editableData, null, 2);
-  stockModal.classList.add("active");
-
+      stockEditor.value = JSON.stringify(editableData, null, 2);
+      stockModal.classList.add("active");
     }
+
     function closeStockEditor() {
       stockModal.classList.remove("active");
     }
@@ -1366,7 +1371,7 @@ Name:"></textarea>
             price: Number(item.price)
           }))
         };
-        
+
         renderGameMenu();
         showGame(currentGame);
         closeStockEditor();
@@ -1376,21 +1381,14 @@ Name:"></textarea>
       }
     }
 
-   window.addEventListener("load", function() {
+    window.addEventListener("click", function(e) {
+      if (e.target === stockModal) {
+        closeStockEditor();
+      }
+    });
 
-  renderGameMenu();
-
-  document.getElementById("loadingScreen").classList.add("hide");
-
-}); 
-
-    window.onload = function() {
-
-  renderGameMenu();
-
-  document.getElementById("loadingScreen").classList.add("hide");
-
-};
+    window.addEventListener("load", function() {
+      renderGameMenu();
 
       setTimeout(() => {
         document.getElementById("loadingScreen").classList.add("hide");
@@ -1398,6 +1396,5 @@ Name:"></textarea>
     });
   </script>
 </body>
-</html>
-        
-        
+</html>                 
+    
