@@ -10,312 +10,337 @@
       padding:0;
       box-sizing:border-box;
     }
-body{
-font-family:Arial, sans-serif;
-background:linear-gradient(135deg,#00eaff,#0078ff);
-color:white;
-min-height:100vh;
-}
-    
+
+    body{
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #19d8ff, #00bfff, #35cfff);
+      color: white;
+      min-height: 100vh;
+    }
 
     .container{
-      width:100%;
-      max-width:1200px;
-      margin:0 auto;
-      padding:20px;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
     }
 
     .header{
-      text-align:center;
-      padding:24px 16px;
-      margin-bottom:24px;
-      background:#032b5c;
-      border:2px solid #021d42;
-      border-radius:20px;
-      box-shadow:0 0 20px rgba(255, 221, 0, 0.6);
+      background: #082f6b;
+      border: 2px solid #031b44;
+      border-radius: 24px;
+      padding: 28px 16px;
+      text-align: center;
+      box-shadow: 0 0 18px rgba(0,0,0,0.25);
+      margin-bottom: 24px;
     }
 
     .header h1{
-      color:#ffd900;
-      font-size:38px;
-      text-shadow:0 0 8px #ffd900, 0 0 16px #ffd900, 0 0 24px #ffea61;
-      margin-bottom:8px;
+      color: #ffd900;
+      font-size: 42px;
+      text-shadow: 0 0 8px #ffd900, 0 0 18px #ffd900, 0 0 28px #fff176;
     }
 
     .header p{
-      color:#ffe866;
-      font-size:18px;
-      text-shadow:0 0 8px #ffd900;
+      margin-top: 10px;
+      font-size: 24px;
+      color: #ffe866;
+      text-shadow: 0 0 8px #ffd900;
     }
 
     .app-grid{
-      display:grid;
-      grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-      gap:18px;
-      margin-bottom:28px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 18px;
+      margin-bottom: 24px;
     }
 
     .app-card{
-      background:#032b5c;
-      border:2px solid #021d42;
-      border-radius:18px;
-      padding:20px;
-      cursor:pointer;
-      text-align:center;
-      transition:0.25s;
-      box-shadow:0 0 12px rgba(0,0,0,0.25);
+      background: #08397f;
+      border: 2px solid #031b44;
+      border-radius: 20px;
+      padding: 24px 16px;
+      text-align: center;
+      font-size: 20px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.25s;
+      box-shadow: 0 0 14px rgba(0,0,0,0.2);
     }
 
-    .app-card:hover,
-    .app-card.active{
-      transform:translateY(-4px) scale(1.02);
-      box-shadow:0 0 18px #001d4d;
-      background:#043672;
+    .app-card:hover{
+      transform: translateY(-4px);
+      background: #0a4598;
     }
 
-    .app-card h3{
-      font-size:20px;
-      color:#ffffff;
-    }
-
-    .content{
-      display:grid;
-      grid-template-columns:1.7fr 1fr;
-      gap:22px;
+    .game-page{
+      display: none;
+      grid-template-columns: 1.5fr 1fr;
+      gap: 22px;
+      margin-top: 8px;
     }
 
     .panel{
-      background:#032b5c;
-      border:2px solid #021d42;
-      border-radius:20px;
-      padding:22px;
-      box-shadow:0 0 14px rgba(0,0,0,0.2);
+      background: #082f6b;
+      border: 2px solid #031b44;
+      border-radius: 24px;
+      padding: 22px;
+      box-shadow: 0 0 16px rgba(0,0,0,0.2);
     }
 
-    .section-title{
-      font-size:28px;
-      margin-bottom:16px;
-      color:#ffd900;
-      text-shadow:0 0 8px #ffd900;
+    .game-title{
+      color: #ffd900;
+      font-size: 34px;
+      text-shadow: 0 0 8px #ffd900;
+      margin-bottom: 18px;
     }
 
-    .sub-title{
-      margin:18px 0 12px;
-      font-size:20px;
-      color:#9cecff;
+    .top-bar{
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 18px;
+      flex-wrap: wrap;
     }
 
-    .items{
-      display:grid;
-      gap:12px;
-    }
-
-    .item{
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      gap:12px;
-      background:#043672;
-      border:1px solid #0d234b;
-      border-radius:14px;
-      padding:14px;
-      flex-wrap:wrap;
-    }
-
-    .item label{
-      display:flex;
-      align-items:center;
-      gap:10px;
-      cursor:pointer;
-      font-size:16px;
-      flex:1;
-      min-width:200px;
-    }
-
-    .item input[type="checkbox"]{
-      width:18px;
-      height:18px;
-      accent-color:#ffd900;
-    }
-
-    .price{
-      color:#ffe866;
-      font-weight:bold;
-      font-size:17px;
+    .back-btn{
+      background: #12d7ff;
+      color: #04204e;
+      border: none;
+      border-radius: 12px;
+      padding: 12px 18px;
+      font-weight: bold;
+      font-size: 15px;
+      cursor: pointer;
+      box-shadow: 0 0 12px rgba(18,215,255,0.8);
     }
 
     .preview-box{
-      margin-top:16px;
-      width:100%;
-      border-radius:16px;
-      overflow:hidden;
-      border:2px solid #0d234b;
-      background:#043672;
+      width: 100%;
+      border-radius: 18px;
+      overflow: hidden;
+      background: #0a4598;
+      border: 2px solid #031b44;
+      margin-bottom: 18px;
     }
 
     .preview-box img{
-      width:100%;
-      display:block;
-      object-fit:cover;
-      max-height:340px;
+      width: 100%;
+      display: block;
+      max-height: 360px;
+      object-fit: cover;
     }
 
-    .preview-placeholder{
-      padding:40px 20px;
-      text-align:center;
-      color:#d7f8ff;
+    .section-label{
+      color: #bfefff;
+      font-size: 18px;
+      margin-bottom: 12px;
+    }
+
+    .items{
+      display: grid;
+      gap: 12px;
+    }
+
+    .item{
+      background: #0a4598;
+      border: 1px solid #04204e;
+      border-radius: 16px;
+      padding: 15px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .item label{
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+      flex: 1;
+      min-width: 220px;
+      font-size: 18px;
+    }
+
+    .item input[type="checkbox"],
+    .payment-option input[type="radio"]{
+      width: 18px;
+      height: 18px;
+      accent-color: #12d7ff;
+    }
+
+    .price{
+      color: #ffe866;
+      font-size: 18px;
+      font-weight: bold;
     }
 
     .cart-title{
-      font-size:26px;
-      color:#ffd900;
-      text-shadow:0 0 8px #ffd900;
-      margin-bottom:16px;
+      color: #ffd900;
+      font-size: 30px;
+      text-shadow: 0 0 8px #ffd900;
+      margin-bottom: 16px;
     }
 
     .cart-list{
-      min-height:120px;
-      background:#043672;
-      border-radius:14px;
-      padding:14px;
-      margin-bottom:16px;
+      min-height: 120px;
+      background: #0a4598;
+      border-radius: 16px;
+      padding: 14px;
+      margin-bottom: 16px;
     }
 
     .cart-empty{
-      color:#d8f7ff;
-      opacity:0.9;
+      color: #d9f8ff;
     }
 
     .cart-row{
-      display:flex;
-      justify-content:space-between;
-      gap:10px;
-      padding:8px 0;
-      border-bottom:1px solid rgba(255,255,255,0.12);
-      font-size:15px;
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 10px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.14);
+      font-size: 15px;
     }
 
     .cart-row:last-child{
-      border-bottom:none;
+      border-bottom: none;
     }
 
     .total{
-      margin:14px 0 16px;
-      font-size:20px;
-      font-weight:bold;
-      color:#ffe866;
+      font-size: 20px;
+      color: #ffe866;
+      font-weight: bold;
+      margin-bottom: 18px;
     }
 
     .input-label{
-      display:block;
-      margin-bottom:8px;
-      color:#ffffff;
-      font-weight:bold;
+      display: block;
+      margin-bottom: 8px;
+      font-weight: bold;
+      font-size: 18px;
     }
 
     textarea{
-      width:100%;
-      min-height:120px;
-      border:none;
-      outline:none;
-      border-radius:14px;
-      padding:14px;
-      resize:vertical;
-      font-size:15px;
-      background:#eafcff;
-      color:#00122c;
-      margin-bottom:16px;
+      width: 100%;
+      min-height: 130px;
+      border: none;
+      outline: none;
+      resize: vertical;
+      border-radius: 16px;
+      padding: 14px;
+      font-size: 16px;
+      background: #2ce7ff;
+      color: #04204e;
+      margin-bottom: 18px;
+      box-shadow: 0 0 14px rgba(44,231,255,0.65);
     }
 
-    .telegram-box{
-      background:#043672;
-      padding:14px;
-      border-radius:14px;
-      margin-top:10px;
+    .payment-box{
+      background: #0a4598;
+      border-radius: 16px;
+      padding: 14px;
+      margin-bottom: 18px;
     }
 
-    .telegram-box a{
-      color:#ffd900;
-      font-weight:bold;
-      text-decoration:none;
-      text-shadow:0 0 8px #ffd900;
+    .payment-title{
+      font-size: 18px;
+      font-weight: bold;
+      margin-bottom: 12px;
+      color: #ffffff;
+    }
+
+    .payment-options{
+      display: grid;
+      gap: 10px;
+    }
+
+    .payment-option{
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 17px;
     }
 
     .telegram-btn{
-      display:inline-block;
-      margin-top:14px;
-      background:#ffd900;
-      color:#032b5c;
-      padding:12px 18px;
-      border-radius:12px;
-      text-decoration:none;
-      font-weight:bold;
-      box-shadow:0 0 12px rgba(255, 217, 0, 0.7);
+      width: 100%;
+      border: none;
+      border-radius: 16px;
+      padding: 15px 18px;
+      background: #12d7ff;
+      color: #04204e;
+      font-size: 18px;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 0 14px rgba(18,215,255,0.85);
+      transition: 0.25s;
     }
-    <button class="telegram-btn" onclick="sendTelegramOrder()">
-Order via Telegram
-</button>
 
-    .hint{
-      margin-top:12px;
-      font-size:14px;
-      color:#d9f7ff;
-      line-height:1.5;
+    .telegram-btn:hover{
+      transform: translateY(-2px);
+    }
+
+    .telegram-id{
+      margin-top: 10px;
+      text-align: center;
+      color: #dffcff;
+      font-size: 15px;
     }
 
     @media (max-width: 900px){
-      .content{
-        grid-template-columns:1fr;
+      .game-page{
+        grid-template-columns: 1fr;
       }
 
       .header h1{
-        font-size:30px;
+        font-size: 34px;
       }
 
-      .section-title,
-      .cart-title{
-        font-size:24px;
+      .header p{
+        font-size: 20px;
+      }
+
+      .game-title{
+        font-size: 28px;
       }
     }
   </style>
 </head>
 <body>
   <div class="container">
+
     <div class="header">
       <h1>Gamepay Hub</h1>
       <p>Mobile games Topup</p>
     </div>
 
-    <div class="app-card" onclick="showGame('mlbb')">
-MLBB
-</div>
+    <div id="gameMenu" class="app-grid">
+      <div class="app-card" onclick="showGame('mlbb')">MLBB</div>
+      <div class="app-card" onclick="showGame('genshin')">Genshin Impact</div>
+      <div class="app-card" onclick="showGame('hsr')">Honkai Star Rail</div>
+      <div class="app-card" onclick="showGame('zzz')">Zenless Zero Zone</div>
+    </div>
 
-<div class="app-card" onclick="showGame('genshin')">
-Genshin Impact
-</div>
-
-<div class="app-card" onclick="showGame('hsr')">
-Honkai Star Rail
-</div>
-
-<div class="app-card" onclick="showGame('zzz')">
-Zenless Zero Zone
-</div>
-
-    <div id="gamePage" class="content" style="display:none;">
+    <div id="gamePage" class="game-page">
       <div class="panel">
-        <div id="gameTitle" class="section-title">Mobile Legends Top up</div>
-
-        <div class="preview-box" id="previewBox">
-          <img id="gameImage" src="https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=1200&q=80" alt="game preview">
+        <div class="top-bar">
+          <div id="gameTitle" class="game-title">Mobile Legends Top up</div>
+          <button class="back-btn" onclick="backToMenu()">Back to Games</button>
         </div>
 
-        <div class="sub-title">Price</div>
+        <div class="preview-box">
+          <img id="gameImage" src="" alt="Game Image">
+        </div>
+
+        <div class="section-label">Price</div>
         <div id="itemsContainer" class="items"></div>
       </div>
 
       <div class="panel">
         <div class="cart-title">Order Cart</div>
+
         <div id="cartList" class="cart-list">
           <div class="cart-empty">No items selected yet.</div>
         </div>
@@ -323,18 +348,25 @@ Zenless Zero Zone
         <div class="total">Total: <span id="totalPrice">0</span> ks</div>
 
         <label class="input-label" for="accountInfo">Account information</label>
-        <textarea id="accountInfo" placeholder="Enter your account information here...&#10;Example:&#10;Game ID:&#10;Server ID:&#10;Name:"></textarea>
+        <textarea id="accountInfo" placeholder="Enter your account information here...
+Example:
+Game ID:
+Server ID:
+Name:"></textarea>
 
-        <div class="telegram-box">
-          Order via Telegram:
-          <a href="https://t.me/angsthtun" target="_blank">@angsthtun</a>
-          <br>
-          <a class="telegram-btn" id="telegramOrderBtn" href="https://t.me/angsthtun" target="_blank">Order via Telegram</a>
-          <div class="hint">
-            Select items first, then write your account information.<br>
-            Telegram button ကိုနှိပ်ပြီး order ပို့နိုင်ပါတယ်။
+        <div class="payment-box">
+          <div class="payment-title">Payment method</div>
+          <div class="payment-options">
+            <label class="payment-option"><input type="radio" name="paymentMethod" value="Kpay"> Kpay</label>
+            <label class="payment-option"><input type="radio" name="paymentMethod" value="Wave"> Wave</label>
+            <label class="payment-option"><input type="radio" name="paymentMethod" value="UAB"> UAB</label>
+            <label class="payment-option"><input type="radio" name="paymentMethod" value="Binance"> Binance</label>
+            <label class="payment-option"><input type="radio" name="paymentMethod" value="Aya Pay"> Aya Pay</label>
           </div>
         </div>
+
+        <button class="telegram-btn" onclick="sendTelegramOrder()">Order via Telegram</button>
+        <div class="telegram-id">@angsthtun</div>
       </div>
     </div>
   </div>
@@ -345,12 +377,12 @@ Zenless Zero Zone
         title: "Mobile Legends Top up",
         image: "https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=1200&q=80",
         items: [
-          { name: "2×💎 50+50", price: 3100 },
-          { name: "2×💎 150+150", price: 9000 },
-          { name: "2×💎 250+250", price: 14800 },
-          { name: "2×💎 500+500", price: 30000 },
+          { name: "2x💎 50+50", price: 3100 },
+          { name: "2x💎 150+150", price: 9000 },
+          { name: "2x💎 250+250", price: 14800 },
+          { name: "2x💎 500+500", price: 30000 },
           { name: "✉️ Twilight pass", price: 32300 },
-          { name: "📆📆📆 3wp + 11💎", price: 17900 },
+          { name: "📆📆📆 3wp+11💎", price: 17900 },
           { name: "📆📆 2wp + 86", price: 16350 },
           { name: "📆 1wp + 172💎", price: 15400 },
           { name: "💎 343", price: 19150 },
@@ -392,30 +424,35 @@ Zenless Zero Zone
       }
     };
 
-    let currentGame = "mlbb";
+    let currentGame = "";
 
-    function showGame(gameKey, cardEl){
+    function showGame(gameKey){
       currentGame = gameKey;
-      const game = gameData[gameKey];
 
-      document.getElementById("gameTitle").textContent = game.title;
-      document.getElementById("gameImage").src = game.image;
-      document.getElementById("gameImage").alt = game.title;
+      document.getElementById("gameMenu").style.display = "none";
+      document.getElementById("gamePage").style.display = "grid";
 
-      document.querySelectorAll(".app-card").forEach(card => card.classList.remove("active"));
-      if(cardEl) cardEl.classList.add("active");
+      document.getElementById("gameTitle").textContent = gameData[gameKey].title;
+      document.getElementById("gameImage").src = gameData[gameKey].image;
+      document.getElementById("gameImage").alt = gameData[gameKey].title;
 
       renderItems();
-      updateCart();
+      clearCart();
+    }
+
+    function backToMenu(){
+      document.getElementById("gameMenu").style.display = "grid";
+      document.getElementById("gamePage").style.display = "none";
+      clearCart();
     }
 
     function renderItems(){
       const container = document.getElementById("itemsContainer");
-      const game = gameData[currentGame];
+      const items = gameData[currentGame].items;
 
       container.innerHTML = "";
 
-      game.items.forEach((item, index) => {
+      items.forEach((item) => {
         const row = document.createElement("div");
         row.className = "item";
 
@@ -436,26 +473,23 @@ Zenless Zero Zone
     }
 
     function updateCart(){
-      const checks = document.querySelectorAll(".item-check:checked");
+      const checkedItems = document.querySelectorAll(".item-check:checked");
       const cartList = document.getElementById("cartList");
       const totalPrice = document.getElementById("totalPrice");
 
-      if(checks.length === 0){
+      if(checkedItems.length === 0){
         cartList.innerHTML = `<div class="cart-empty">No items selected yet.</div>`;
         totalPrice.textContent = "0";
-        updateTelegramLink([]);
         return;
       }
 
-      let total = 0;
       let html = "";
-      let selectedItems = [];
+      let total = 0;
 
-      checks.forEach(check => {
-        const name = check.dataset.name;
-        const price = Number(check.dataset.price);
+      checkedItems.forEach(item => {
+        const name = item.dataset.name;
+        const price = Number(item.dataset.price);
         total += price;
-        selectedItems.push({ name, price });
 
         html += `
           <div class="cart-row">
@@ -467,85 +501,59 @@ Zenless Zero Zone
 
       cartList.innerHTML = html;
       totalPrice.textContent = total.toLocaleString();
-      updateTelegramLink(selectedItems);
     }
 
-    function updateTelegramLink(selectedItems){
+    function clearCart(){
+      document.getElementById("cartList").innerHTML = `<div class="cart-empty">No items selected yet.</div>`;
+      document.getElementById("totalPrice").textContent = "0";
+      document.getElementById("accountInfo").value = "";
+
+      const checks = document.querySelectorAll(".item-check");
+      checks.forEach(check => check.checked = false);
+
+      const radios = document.querySelectorAll('input[name="paymentMethod"]');
+      radios.forEach(radio => radio.checked = false);
+    }
+
+    function sendTelegramOrder(){
+      const selectedItems = document.querySelectorAll(".item-check:checked");
       const accountInfo = document.getElementById("accountInfo").value.trim();
-      const button = document.getElementById("telegramOrderBtn");
+      const paymentMethod = document.querySelector('input[name="paymentMethod"]:checked');
 
-      let message = `Hello, I want to order from Gamepay Hub.%0A%0AGame: ${gameData[currentGame].title}%0A`;
-
-      if(selectedItems.length > 0){
-        message += `%0ASelected Items:%0A`;
-        selectedItems.forEach((item, i) => {
-          message += `${i + 1}. ${item.name} - ${item.price} ks%0A`;
-        });function showGame(gameKey, cardEl){
-
-document.getElementById("gameMenu").style.display="none";
-document.getElementById("gamePage").style.display="grid";
-
-currentGame = gameKey;
-const game = gameData[gameKey];
-
-document.getElementById("gameTitle").textContent = game.title;
-document.getElementById("gameImage").src = game.image;
-
-document.querySelectorAll(".app-card").forEach(card => card.classList.remove("active"));
-if(cardEl) cardEl.classList.add("active");
-
-renderItems();
-updateCart();
-
-        }
-      }
-      function sendTelegramOrder(){
-
-let account = document.getElementById("accountInfo").value;
-let items = document.querySelectorAll(".item-check:checked");
-
-let message = "Gamepay Hub Order\n\n";
-
-items.forEach((item)=>{
-let name = item.dataset.name;
-let price = item.dataset.price;
-
-message += name + " - " + price + " ks\n";
-});
-
-message += "\nAccount Info:\n" + account;
-
-let url = "https://t.me/angsthtun?text=" + encodeURIComponent(message);
-
-window.open(url,"_blank");
-window.open(url,"_blank");
-}
-
-function showGame(game){
-
-document.getElementById("gameMenu").style.display="none";
-document.getElementById("gamePage").style.display="block";
-
-}
-      }<script>
-
-  
-
-      const total = document.getElementById("totalPrice").textContent.replace(/,/g, "");
-      message += `%0ATotal: ${total} ks%0A`;
-
-      if(accountInfo){
-        message += `%0AAccount Information:%0A${encodeURIComponent(accountInfo)}%0A`;
-      } else {
-        message += `%0AAccount Information:%0A`;
+      if(selectedItems.length === 0){
+        alert("Please select at least one item.");
+        return;
       }
 
-      button.href = `https://t.me/angsthtun`;
+      if(accountInfo === ""){
+        alert("Please fill in account information.");
+        return;
+      }
+
+      if(!paymentMethod){
+        alert("Please select a payment method.");
+        return;
+      }
+
+      let total = 0;
+      let message = "Gamepay Hub Order\n\n";
+      message += "Game: " + gameData[currentGame].title + "\n\n";
+      message += "Selected Items:\n";
+
+      selectedItems.forEach((item, index) => {
+        const name = item.dataset.name;
+        const price = Number(item.dataset.price);
+        total += price;
+        message += (index + 1) + ". " + name + " - " + price + " ks\n";
+      });
+
+      message += "\nTotal: " + total + " ks\n";
+      message += "Payment Method: " + paymentMethod.value + "\n\n";
+      message += "Account Information:\n" + accountInfo;
+
+      const url = "https://t.me/angsthtun?text=" + encodeURIComponent(message);
+      window.open(url, "_blank");
     }
-
-    document.getElementById("accountInfo").addEventListener("input", updateCart);
-
-    renderItems();
   </script>
 </body>
 </html>
