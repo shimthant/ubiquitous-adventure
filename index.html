@@ -397,9 +397,16 @@ document.getElementById("total").textContent=total
 
 function sendOrder(){
 
-let msg="Gamepay Hub Order\n\n"
+if(!currentGame){
+alert("Select a game first")
+return
+}
+
+let msg="🎮 Gamepay Hub Order\n\n"
 
 msg+="Game: "+data[currentGame].title+"\n\n"
+
+msg+="Items:\n"
 
 for(let i in cart){
 
@@ -413,7 +420,17 @@ msg+=item.name+" x"+cart[i]+"\n"
 
 }
 
-msg+="\nAccount:\n"+document.getElementById("account").value
+msg+="\nAccount:\n"+document.getElementById("account").value+"\n\n"
+
+let pay=document.querySelector('input[name="pay"]:checked')
+
+if(pay){
+msg+="Payment: "+pay.value+"\n"
+}else{
+msg+="Payment: Not selected\n"
+}
+
+msg+="\nTotal: "+document.getElementById("total").textContent+" ks"
 
 window.open("https://t.me/"+TELEGRAM+"?text="+encodeURIComponent(msg))
 
@@ -444,8 +461,7 @@ renderMenu()
 
 renderMenu()
 
-</script>
-
+ </script>
 </body>
 </html>
     
