@@ -833,10 +833,8 @@ successPopup.style.display = "flex";
 setTimeout(()=>{
 
 const telegramUrl =
-"https://t.me/" + TELEGRAM + "?text=" + encodeURIComponent(msg);
-
-window.open(telegramUrl, "_blank");
-
+"tg://resolve?domain=" + TELEGRAM + "&text=" + encodeURIComponent(msg);
+  window.location.href = telegramUrl;
 },500);
 
   } 
