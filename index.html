@@ -815,7 +815,8 @@ const TELEGRAM_USERNAME = "angsthtun";
   msg += "💰 Total: " + total + " ks";
 // COPY ORDER TEXT
 navigator.clipboard.writeText(msg).catch(()=>{});
-
+// popup hide
+document.getElementById("successPopup").style.display = "none";
 // TELEGRAM LINK
 const url = "https://t.me/" + TELEGRAM_USERNAME + "?text=" + encodeURIComponent(msg);
 
