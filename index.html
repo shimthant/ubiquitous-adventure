@@ -375,11 +375,13 @@ box-shadow:0 0 10px #00eaff;
 
     .popup-box{
       width:100%;
-      max-width:360px;
+      max-width:320px;
       background:linear-gradient(180deg,#0c3a82,#082d67);
       border:1px solid rgba(120,232,255,.26);
       border-radius:20px;
       padding:20px;
+      word-break:break-word;
+      overflow-wrap:break-word;
       text-align:center;
       box-shadow:0 0 24px rgba(0,234,255,.22);
       animation:popIn .25s ease;
@@ -389,7 +391,18 @@ box-shadow:0 0 10px #00eaff;
       from{transform:scale(.85); opacity:0;}
       to{transform:scale(1); opacity:1;}
     }
+@media (max-width:600px){
 
+.popup{
+padding:12px;
+}
+
+.popup-box{
+max-width:92vw;
+padding:18px;
+}
+
+}
     .popup-box h3{
       font-size:22px;
       color:#fff;
