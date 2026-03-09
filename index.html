@@ -787,8 +787,8 @@ function updateCart(){
 
   totalBox.textContent = total;
 }
-
 function sendOrder(){
+
   if(!currentGame){
     alert("Please select a game first.");
     return;
@@ -800,45 +800,24 @@ function sendOrder(){
     return;
   }
 
-  const account = safeText(accountInput.value) || "-";
+  const account = accountInput.value || "-";
   const pay = document.querySelector('input[name="pay"]:checked');
   const payment = pay ? pay.value : "Not selected";
   const total = totalBox.textContent;
 
-if(!currentGame){
-alert("Please select a game first.");
-return;
-}
+  let msg = "🧾 GAMEPAY HUB ORDER\n\n";
+  msg += "🎮 Game: " + data[currentGame].title + "\n\n";
+  msg += "💎 Items:\n";
+  msg += selected.map(i => "• " + i.text).join("\n") + "\n\n";
+  msg += "👤 Account: " + account + "\n";
+  msg += "💳 Payment: " + payment + "\n";
+  msg += "💰 Total: " + total + " ks";
 
-let msg = "Gamepay Hub Order\n\n";
-msg += "Game: " + data[currentGame].title + "\n\n";
-msg += "Selected Items:\n";
-msg += selected.map(item => item.text).join("\n") + "\n\n";
-msg += "Account: " + account + "\n";
-msg += "Payment: " + payment + "\n";
-msg += "Total Amount: " + total + " ks";
+  const telegramUrl =
+  "https://t.me/" + TELEGRAM + "?text=" + encodeURIComponent(msg);
 
-
-// COPY TO CLIPBOARD
-if(navigator.clipboard){
-navigator.clipboard.writeText(msg).catch(()=>{});
-}
-
-
-// SHOW SUCCESS POPUP
-successPopup.style.display = "flex";
-
-
-// OPEN TELEGRAM DIRECT CHAT
-setTimeout(()=>{
-
-const telegramUrl =
-"tg://resolve?domain=" + TELEGRAM + "&text=" + encodeURIComponent(msg);
   window.location.href = telegramUrl;
-},500);
-
-  } 
-
+    }
 function closePopup(){
   successPopup.style.display = "none";
 }
