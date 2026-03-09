@@ -812,16 +812,18 @@ function sendOrder(){
   msg += "👤 Account: " + account + "\n";
   msg += "💳 Payment: " + payment + "\n";
   msg += "💰 Total: " + total + " ks";
-const telegramUrl =
-"https://t.me/" + TELEGRAM + "?text=" + encodeURIComponent(msg);
 
-// Telegram in-app browser friendly open
-const a = document.createElement("a");
-a.href = telegramUrl;
-a.target = "_blank";
-document.body.appendChild(a);
-a.click();
-a.remove();
+  const telegramUrl =
+  "https://t.me/" + TELEGRAM + "?text=" + encodeURIComponent(msg);
+
+  // create link and open (telegram browser friendly)
+  const link = document.createElement("a");
+  link.href = telegramUrl;
+  link.target = "_blank";
+  document.body.appendChild(link);
+  link.click();
+  link.remove();
+}
   
 
 renderMenu();
