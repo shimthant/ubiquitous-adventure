@@ -749,7 +749,7 @@ function updateCart(){
   }
 
   totalBox.textContent = total;
-}function sendOrder(){
+function sendOrder(){
 
   if(!currentGame){
     alert("Please select a game first.");
@@ -779,20 +779,20 @@ function updateCart(){
 
   const encodedMsg = encodeURIComponent(msg);
 
-  // ✅ Telegram Deep Link (NO browser chooser)
   const telegramURL = "tg://resolve?domain=" + TELEGRAM_USERNAME + "&text=" + encodedMsg;
 
-  // fallback (if tg:// not supported)
-  const fallbackURL = "https://t.me/" + TELEGRAM_USERNAME + "?text=" + encodedMsg;
-
-  // try open telegram app
+  // 🔥 OPEN TELEGRAM (same tab)
   window.location.href = telegramURL;
 
-  // fallback after 1 sec
+  // 🔥 FORCE HIDE WEBSITE
   setTimeout(() => {
-    window.location.href = fallbackURL;
-  }, 1000);
+    document.body.innerHTML = "";
+  }, 300);
 
+  // 🔥 BACKUP (if tg fail)
+  setTimeout(() => {
+    window.location.href = "about:blank";
+  }, 800);
     }
 
 renderMenu();
