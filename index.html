@@ -734,7 +734,6 @@ function buildSelectedItems(){
 
   return lines;
 }
-
 function updateCart(){
   const selected = buildSelectedItems();
   let total = 0;
@@ -749,6 +748,8 @@ function updateCart(){
   }
 
   totalBox.textContent = total;
+} // ✅ clean close
+
 function sendOrder(){
 
   if(!currentGame){
