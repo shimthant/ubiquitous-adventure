@@ -781,18 +781,18 @@ function sendOrder(){
 
   const telegramURL = "tg://resolve?domain=" + TELEGRAM_USERNAME + "&text=" + encodedMsg;
 
-  // 🔥 OPEN TELEGRAM (same tab)
-  window.location.href = telegramURL;
+  // ✅ bypass browser block
+  const a = document.createElement("a");
+  a.href = telegramURL;
+  a.style.display = "none";
+  document.body.appendChild(a);
+  a.click();
 
-  // 🔥 FORCE HIDE WEBSITE
+  // fallback
   setTimeout(() => {
-    document.body.innerHTML = "";
-  }, 300);
+    window.location.href = "https://t.me/" + TELEGRAM_USERNAME + "?text=" + encodedMsg;
+  }, 1000);
 
-  // 🔥 BACKUP (if tg fail)
-  setTimeout(() => {
-    window.location.href = "about:blank";
-  }, 800);
     }
 
 renderMenu();
