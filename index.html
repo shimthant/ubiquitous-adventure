@@ -779,20 +779,17 @@ function sendOrder(){
   msg += "💰 Total: " + total + " ks";
 
   const encodedMsg = encodeURIComponent(msg);
+const tgLink = "tg://resolve?domain=" + TELEGRAM_USERNAME + "&text=" + encodedMsg;
+const webLink = "https://t.me/" + TELEGRAM_USERNAME + "?text=" + encodedMsg;
 
-  const telegramURL = "tg://resolve?domain=" + TELEGRAM_USERNAME + "&text=" + encodedMsg;
+// 🔥 open telegram app first
+window.location.href = tgLink;
 
-  // ✅ bypass browser block
-  const a = document.createElement("a");
-  a.href = telegramURL;
-  a.style.display = "none";
-  document.body.appendChild(a);
-  a.click();
-
-  // fallback
-  setTimeout(() => {
-    window.location.href = "https://t.me/" + TELEGRAM_USERNAME + "?text=" + encodedMsg;
-  }, 1000);
+// 🔥 fallback (important)
+setTimeout(() => {
+  window.open(webLink, "_blank");
+}, 500);
+  
 
     }
 
